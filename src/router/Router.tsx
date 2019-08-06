@@ -3,10 +3,10 @@ import {BrowserRouter, Redirect, Route, RouteProps, Switch} from "react-router-d
 import {isAuth} from "./Check";
 import Main from "../components/Main";
 
-const Login = lazy(() => import("../pages/login"));
-const ErrorPage = lazy(() => import("../pages/error"));
-const Dashboard = lazy(() => import("../pages/dashboard"));
-const Setting = lazy(() => import('../pages/setting'));
+const Login = lazy(() => import("../pages/Login"));
+const ErrorPage = lazy(() => import("../pages/Error"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
+const Setting = lazy(() => import('../pages/Setting'));
 
 
 export class AppRouter extends React.Component {

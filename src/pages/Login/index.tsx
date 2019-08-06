@@ -8,9 +8,6 @@ import UserService from "../../services/UserService";
 
 
 interface LoginProps extends RouteComponentProps, FormComponentProps {
-	// account: string,
-	// password: string,
-	// role: number
 }
 
 const Login: React.FC<LoginProps> = (props) => {
@@ -20,7 +17,6 @@ const Login: React.FC<LoginProps> = (props) => {
 		props.form.validateFields((err, values) => {
 			if (!err) {
 				UserService.login({account: values.account, password: values.password, role: values.role}).then(res => {
-					console.log(res);
 					localStorage.setItem('sms_role', values.role);
 					localStorage.setItem('sms_id', res.data.data.id);
 					localStorage.setItem('sms_account', values.account);

@@ -104,7 +104,7 @@ const Setting: React.FC<SettingProps> = (props) => {
 						}
 					</Form.Item>
 					<Form.Item>
-						<div className={styles.save}>
+						<div className={styles.Save}>
 							<Button type="primary" onClick={handleSubmit}>Update</Button>
 						</div>
 					</Form.Item>

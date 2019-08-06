@@ -13,9 +13,11 @@ class Sidebar extends React.Component<RouteComponentProps> {
 
 	render() {
 		const {history} = this.props;
+		console.log(history);
 		return (
 			<div className="Sidebar">
 				<Menu
+					defaultSelectedKeys={[history.location.pathname]}
 					selectedKeys={[history.location.pathname]}
 					mode="inline"
 					theme="dark"
