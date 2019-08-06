@@ -10,7 +10,7 @@ const Menus: Array<Menu> = [{
 	index: '/main/dashboard',
 	title: 'Dashboard'
 }, {
-	icon: 'icon-user',
+	icon: 'icon-setting',
 	index: '/main/setting',
 	title: 'Setting'
 }];

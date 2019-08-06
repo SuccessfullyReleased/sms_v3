@@ -1,17 +1,16 @@
 import {SingleApi} from "../apis";
 
-export type Student = {
+export type Manager = {
 	id?: number,
-	sid?: string,
 	name?: string,
 	password?: string
 }
 
-class StudentService extends SingleApi {
+class ManagerService extends SingleApi {
 
 	constructor() {
-		super(StudentService.name, {
-			baseURL: "/sms/student"
+		super(ManagerService.name, {
+			baseURL: "/sms/manager"
 		})
 	}
 
@@ -21,11 +20,11 @@ class StudentService extends SingleApi {
 		});
 	}
 
-	selectOne(student: Student) {
+	selectOne(Manager: Manager) {
 		return this.request({
 			method: "post",
 			url: '/search',
-			data: student
+			data: Manager
 		});
 	}
 
@@ -38,13 +37,13 @@ class StudentService extends SingleApi {
 		});
 	}
 
-	update(student: Student) {
+	update(Manager: Manager) {
 		return this.request({
 			method:'put',
-			data: student
+			data: Manager
 		})
 	}
 
 }
 
-export default new StudentService();
+export default new ManagerService();

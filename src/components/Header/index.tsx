@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {Avatar, Dropdown, Icon, Menu, Tooltip} from 'antd';
+import {Dropdown, Icon, Menu, Tooltip} from 'antd';
 import IconFont from '../IconFont';
 import styles from './index.module.css';
 
@@ -44,20 +44,13 @@ class Header extends Component<HeaderProps, HeaderState> {
 						{/*	</Link>*/}
 						{/*</Tooltip>*/}
 						{/* 用户头像 */}
-						<Avatar className={styles.userAvator} src={require('../../assets/img/img.jpg')}/>
+						{/*<Avatar className={styles.userAvator} src={require('../../assets/img/img.jpg')}/>*/}
 						{/* 用户名下拉菜单 */}
 						<Dropdown className={styles.userName} trigger={["click"]} overlay={(
 							<Menu onClick={this.handleDropdown}>
 								{/* Menu.Item必须设置唯一的key */}
-								<Menu.Item key="0" className={styles.dropItemLink}>
-									<a href="http://blog.gdfengshuo.com/about/" target="_blank" rel="noopener noreferrer">
-										关于作者
-									</a>
-								</Menu.Item>
 								<Menu.Item key="1" className={styles.dropItemLink}>
-									<a href="https://github.com/lin-xin/react-manage-system" target="_blank" rel="noopener noreferrer">
-										项目仓库
-									</a>
+									个人中心
 								</Menu.Item>
 								<Menu.Divider/>
 								<Menu.Item key="2" className={styles.dropItemLink}>退出登录</Menu.Item>
@@ -76,9 +69,16 @@ class Header extends Component<HeaderProps, HeaderState> {
 
 	// 用户名下拉菜单操作
 	handleDropdown = ({key}: { key: string }) => {
-		if (key === '2') {
-			localStorage.removeItem('username');
-			this.props.history.push('/login');
+		switch (key) {
+			case '1':
+				this.props.history.push('/main/setting');
+				break;
+			case '2':
+				localStorage.removeItem('username');
+				this.props.history.push('/login');
+				break;
+			default:
+				break;
 		}
 	}
 }
