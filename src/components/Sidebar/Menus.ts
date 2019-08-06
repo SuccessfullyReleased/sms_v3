@@ -13,6 +13,10 @@ const Menus: Array<Menu> = [{
 	icon: 'icon-setting',
 	index: '/main/setting',
 	title: 'Setting'
+}, {
+	icon: 'icon-course',
+	index: '/main/course-manage',
+	title: 'CourseManage'
 }];
 
 export default Menus
