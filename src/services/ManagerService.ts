@@ -1,4 +1,5 @@
 import {SingleApi} from "../apis";
+import {HttpServiceResponse, SearchResult} from "./service";
 
 export type Manager = {
 	id?: number,
@@ -14,13 +15,13 @@ class ManagerService extends SingleApi {
 		})
 	}
 
-	selectById(id: number) {
+	selectById(id: number): HttpServiceResponse<Manager> {
 		return this.request({
 			url: `/id/${id}`
 		});
 	}
 
-	selectOne(Manager: Manager) {
+	selectOne(Manager: Manager): HttpServiceResponse<SearchResult<Manager>> {
 		return this.request({
 			method: "post",
 			url: '/search',
@@ -28,7 +29,7 @@ class ManagerService extends SingleApi {
 		});
 	}
 
-	selectAll() {
+	selectAll(): HttpServiceResponse<SearchResult<Manager>> {
 		return this.request({
 			url: '/list',
 			headers: {
@@ -37,9 +38,9 @@ class ManagerService extends SingleApi {
 		});
 	}
 
-	update(Manager: Manager) {
+	update(Manager: Manager): HttpServiceResponse<number> {
 		return this.request({
-			method:'put',
+			method: 'put',
 			data: Manager
 		})
 	}

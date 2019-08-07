@@ -2,45 +2,39 @@ import React, {useState} from 'react';
 import {Button, Col, Form, Icon, Input, Row, Select} from "antd";
 import styles from './index.module.css';
 import {FormComponentProps} from "antd/es/form";
-
-export type CourseManageSearch = {
-	courseName: string,
-	courseType: string,
-	courseStatus: string
-}
+import {Course} from "../../services/CourseService";
 
 interface CourseManageProps extends FormComponentProps {
-	onSearch: (search: CourseManageSearch) => void
+	onSearch: (search: Partial<Course>) => void
+	onAdd: () => void
+	onBatchDelete: () => void
 }
 
-const CourseManageSearch: React.FC<CourseManageProps> = (props) => {
+const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 
 	const [expanded, setExpanded] = useState(false);
 
 	const handleCourseSearch: React.MouseEventHandler = (e) => {
 		e.preventDefault();
 		const {getFieldValue} = props.form;
-		console.log(getFieldValue('courseName'));
-		console.log(getFieldValue('courseType'));
-		console.log(getFieldValue('courseStatus'));
 		props.onSearch({
-			courseName: getFieldValue('courseName'),
-			courseType: getFieldValue('courseType'),
-			courseStatus: getFieldValue('courseStatus')
+			name: getFieldValue('courseName'),
+			type: Number(getFieldValue('courseType')),
+			status: Number(getFieldValue('courseStatus'))
 		});
 	};
 
 	const {getFieldDecorator} = props.form;
 
 	return (
-		<div>
+		<div className="container">
 			<Form>
 				<Row gutter={16}>
 					<Col span={6}>
 						<Form.Item>
 							{
 								getFieldDecorator('courseName')(
-									<Input addonBefore="课程名"/>
+									<Input addonBefore="courseName"/>
 								)
 							}
 						</Form.Item>
@@ -52,10 +46,11 @@ const CourseManageSearch: React.FC<CourseManageProps> = (props) => {
 									{
 										getFieldDecorator('courseType')(
 											<Select
-												placeholder="课程类别"
+												allowClear
+												placeholder="courseType"
 											>
-												<Select.Option value="0">必修</Select.Option>
-												<Select.Option value="1">选修</Select.Option>
+												<Select.Option value="1">Compulsory</Select.Option>
+												<Select.Option value="2">Elective</Select.Option>
 											</Select>
 										)
 									}
@@ -66,34 +61,35 @@ const CourseManageSearch: React.FC<CourseManageProps> = (props) => {
 									{
 										getFieldDecorator('courseStatus')(
 											<Select
-												placeholder="课程状态"
+												allowClear
+												placeholder="courseStatus"
 											>
-												<Select.Option value="0">初始状态</Select.Option>
-												<Select.Option value="1">选课阶段</Select.Option>
-												<Select.Option value="2">授课阶段</Select.Option>
-												<Select.Option value="3">结算阶段</Select.Option>
+												<Select.Option value="1">Initial stage</Select.Option>
+												<Select.Option value="2">Selection stage</Select.Option>
+												<Select.Option value="3">Teaching stage</Select.Option>
+												<Select.Option value="4">Settlement stage</Select.Option>
 											</Select>
 										)
 									}
 								</Form.Item>
 							</Col>
 							<Col span={2}>
-								<a className={styles.MoreLink} onClick={() => setExpanded(false)}>More<Icon type="up"/></a>
+								<span className={styles.MoreLink} onClick={() => setExpanded(false)}>More<Icon type="up"/></span>
 							</Col>
 						</div>
 						:
 						<Col span={2}>
-							<a className={styles.MoreLink} onClick={() => setExpanded(true)}>More<Icon type="down"/></a>
+							<span className={styles.MoreLink} onClick={() => setExpanded(true)}>More<Icon type="down"/></span>
 						</Col>
 					}
 					<Col span={2}>
-						<Button type="primary" onClick={handleCourseSearch}>查找<Icon type="search"/></Button>
+						<Button type="primary" onClick={handleCourseSearch}>Search<Icon type="search"/></Button>
 					</Col>
 					<Col span={2}>
-						<Button icon="plus">插入</Button>
+						<Button icon="plus" onClick={props.onAdd}>Add</Button>
 					</Col>
 					<Col span={3}>
-						<Button type="danger" icon="delete">批量删除</Button>
+						<Button type="danger" icon="delete" onClick={props.onBatchDelete}>batch deletion</Button>
 					</Col>
 				</Row>
 			</Form>
@@ -112,4 +108,6 @@ const CourseManageSearch: React.FC<CourseManageProps> = (props) => {
 	);
 };
 
-export default Form.create({})(CourseManageSearch);
+const CourseManageSearch = Form.create<CourseManageProps>({})(CourseManageSearchContent);
+
+export default CourseManageSearch;

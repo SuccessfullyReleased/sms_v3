@@ -1,4 +1,5 @@
 import {SingleApi} from "../apis";
+import {HttpServiceResponse, SearchResult} from "./service";
 
 export type Student = {
 	id?: number,
@@ -15,13 +16,13 @@ class StudentService extends SingleApi {
 		})
 	}
 
-	selectById(id: number) {
+	selectById(id: number): HttpServiceResponse<Student> {
 		return this.request({
 			url: `/id/${id}`
 		});
 	}
 
-	selectOne(student: Student) {
+	selectOne(student: Student): HttpServiceResponse<SearchResult<Student>> {
 		return this.request({
 			method: "post",
 			url: '/search',
@@ -29,7 +30,7 @@ class StudentService extends SingleApi {
 		});
 	}
 
-	selectAll() {
+	selectAll(): HttpServiceResponse<SearchResult<Student>> {
 		return this.request({
 			url: '/list',
 			headers: {
@@ -38,9 +39,9 @@ class StudentService extends SingleApi {
 		});
 	}
 
-	update(student: Student) {
+	update(student: Student): HttpServiceResponse<number> {
 		return this.request({
-			method:'put',
+			method: 'put',
 			data: student
 		})
 	}

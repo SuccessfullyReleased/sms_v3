@@ -1,9 +1,10 @@
 import {SingleApi} from "../apis";
 import md5 from 'md5'
-import StudentService from "./StudentService";
+import StudentService, {Student} from "./StudentService";
 import {message} from "antd";
-import TeacherService from "./TeacherService";
-import ManagerService from "./ManagerService";
+import TeacherService, {Teacher} from "./TeacherService";
+import ManagerService, {Manager} from "./ManagerService";
+import {HttpServiceResponse} from "./service";
 
 export interface User {
 	role: number,
@@ -23,7 +24,7 @@ class UserService extends SingleApi {
 		})
 	}
 
-	login(user: Required<User>) {
+	login(user: Required<User>): HttpServiceResponse<Student | Teacher | Manager> {
 		user.password = md5(`${user.account}${user.password}`);
 		return this.request({
 			method: "post",
@@ -32,7 +33,7 @@ class UserService extends SingleApi {
 		})
 	}
 
-	verify(password: string) {
+	verify(password: string): HttpServiceResponse<Student | Teacher | Manager> {
 		const role = localStorage.getItem('sms_role');
 		const account = localStorage.getItem('sms_account');
 		if (role && account) {
@@ -50,14 +51,14 @@ class UserService extends SingleApi {
 		}
 	}
 
-	getUser({id, role}: { id: number, role: number }) {
+	getUser({id, role}: { id: number, role: number }): HttpServiceResponse<Student | Teacher | Manager> {
 		return this.request({
 			method: 'get',
 			params: {id, role}
 		})
 	}
 
-	updatePassword(password: string) {
+	updatePassword(password: string): void {
 		const id = localStorage.getItem('sms_id');
 		const role = localStorage.getItem('sms_role');
 		const account = localStorage.getItem('sms_account');

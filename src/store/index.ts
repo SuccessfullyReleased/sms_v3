@@ -3,7 +3,7 @@ import {UserReducer} from "./reducers/UserReducer";
 
 
 const rootReducer = combineReducers({
-	user: UserReducer
+	user: UserReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

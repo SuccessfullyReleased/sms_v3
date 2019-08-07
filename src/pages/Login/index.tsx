@@ -18,9 +18,9 @@ const Login: React.FC<LoginProps> = (props) => {
 			if (!err) {
 				UserService.login({account: values.account, password: values.password, role: values.role}).then(res => {
 					localStorage.setItem('sms_role', values.role);
-					localStorage.setItem('sms_id', res.data.data.id);
+					localStorage.setItem('sms_id', String(res.data.data.id));
 					localStorage.setItem('sms_account', values.account);
-					localStorage.setItem('sms_name', res.data.data.name);
+					localStorage.setItem('sms_name', res.data.data.name as string);
 					props.history.push('/main/dashboard');
 				}).catch(() => {
 					message.error('登录失败!');

@@ -4,6 +4,9 @@ import _ from 'lodash'
 
 const _id = Symbol('id');
 const _http = Symbol('http');
+
+export type HttpResponse<T> = Promise<AxiosResponse<T>>
+
 export default class BaseApi {
 
 	private [_id]: symbol;
@@ -26,7 +29,7 @@ export default class BaseApi {
 		return this[_http];
 	}
 
-	request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
+	request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): HttpResponse<T> {
 		let _config: HttpConfig = {
 			id: this.id
 		};

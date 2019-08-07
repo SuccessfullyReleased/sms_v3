@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {Dropdown, Icon, Menu, Tooltip} from 'antd';
-import IconFont from '../IconFont';
+import {Dropdown, Icon, Menu} from 'antd';
 import styles from './index.module.css';
 
 interface HeaderProps extends RouteComponentProps {
@@ -29,11 +28,11 @@ class Header extends Component<HeaderProps, HeaderState> {
 				<div className={styles.logo}>React Manage System</div>
 				<div className={styles.headerRight}>
 					<div className={styles.headerUserCon}>
-						<Tooltip title={this.props.fullscreen ? 'close' : 'full screen'} placement="bottom">
-							<div className={styles.btnFullscreen} onClick={this.props.handleFullScreen}>
-								{this.props.fullscreen ? <IconFont type="icon-fullscreen-exit"/> : <IconFont type="icon-fullscreen"/>}
-							</div>
-						</Tooltip>
+						{/*<Tooltip title={this.props.fullscreen ? 'close' : 'full screen'} placement="bottom">*/}
+						{/*	<div className={styles.btnFullscreen} onClick={this.props.handleFullScreen}>*/}
+						{/*		{this.props.fullscreen ? <IconFont type="icon-fullscreen-exit"/> : <IconFont type="icon-fullscreen"/>}*/}
+						{/*	</div>*/}
+						{/*</Tooltip>*/}
 						{/*消息提示*/}
 						{/*<Tooltip title={'Message'} placement="bottom">*/}
 						{/*	<Link to="tabs">*/}
