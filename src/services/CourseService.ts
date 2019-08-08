@@ -1,117 +1,37 @@
-import {SingleApi} from "../apis";
-import {HttpServiceResponse, SearchResult} from "./service";
+import {BaseService, HttpServiceResponse, Model, PageInfo, SearchResult} from "./service";
 
-export type Course = {
-	id: number,
+export interface Course extends Model {
 	name: string,
 	type: number,
 	status: number
 }
 
 export const CourseType = {
-	Compulsory: 0,
-	Elective: 1
+	Compulsory: 1,
+	Elective: 2
 };
 
 export const CourseStatus = {
-	Initial: 0,
-	Selection: 1,
-	Teaching: 2,
-	Settlement: 3
+	Initial: 1,
+	Selection: 2,
+	Teaching: 3,
+	Settlement: 4
 };
 
-class CourseService extends SingleApi {
+export const defaultCourse: Partial<Course> = {
+	name: '',
+	type: 1,
+	status: 1
+};
+
+class CourseService extends BaseService<Course> {
 
 	constructor() {
-		super(CourseService.name, {
-			baseURL: "/sms/course"
-		})
+		super('course');
 	}
 
-	selectById(id: number): HttpServiceResponse<Course> {
-		return this.request({
-			url: `/id/${id}`
-		});
-	}
-
-	selectOne(course: Course): HttpServiceResponse<SearchResult<Course>> {
-		return this.request({
-			method: "post",
-			url: '/search',
-			data: course
-		});
-	}
-
-	select(course: Partial<Course>, pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Course>> {
-		if (course.id || course.name || course.type || course.status) {
-			if (pageNum && pageSize) {
-				return this.request({
-					method: 'post',
-					url: '/list/search',
-					headers: {
-						pageNum, pageSize
-					},
-					data: course
-				});
-			} else {
-				return this.request({
-					method: 'post',
-					url: '/list/search',
-					headers: {
-						noPage: true
-					},
-					data: course
-				});
-			}
-		} else {
-			return this.selectAll(pageNum, pageSize);
-		}
-	}
-
-	selectAll(pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Course>> {
-		if (pageNum && pageSize) {
-			return this.request({
-				url: '/list',
-				headers: {
-					pageNum, pageSize
-				}
-			});
-		} else {
-			return this.request({
-				url: '/list',
-				headers: {
-					noPage: true
-				}
-			});
-		}
-	}
-
-	insert(course: Partial<Course>): HttpServiceResponse<number> {
-		return this.request({
-			method: 'post',
-			data: course
-		})
-	}
-
-	update(course: Partial<Course>): HttpServiceResponse<number> {
-		return this.request({
-			method: 'put',
-			data: course
-		})
-	}
-
-	deleteById(id: number): HttpServiceResponse<number> {
-		return this.request({
-			method: 'delete',
-			url: `/id/${id}`
-		})
-	}
-
-	deleteByIds(ids: number[]): HttpServiceResponse<number> {
-		return this.request({
-			method: 'delete',
-			url: `/list/${ids.join(',')}`
-		})
+	isModel(record: Partial<Course>): boolean {
+		return !!(record.name || record.type || record.status);
 	}
 
 	filter(record: Partial<Course>): Partial<Course> {
@@ -129,6 +49,26 @@ class CourseService extends SingleApi {
 			record.status = undefined;
 		}
 		return record;
+	}
+
+	selectOneRecord(record: Partial<Course>): HttpServiceResponse<SearchResult<Course>> {
+		return super.selectOne(record, this.isModel);
+	}
+
+	selectRecords(record: Partial<Course>, pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Course>> {
+		return super.select(record, this.isModel, pageNum, pageSize);
+	}
+
+	selectAllRecords(pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Course>> {
+		return super.selectAll(pageNum, pageSize);
+	}
+
+	insertRecord(record: Partial<Course>): HttpServiceResponse<number> {
+		return super.insert(this.filter(record), this.isModel);
+	}
+
+	updateRecord(record: Partial<Course>): HttpServiceResponse<number> {
+		return super.update(this.filter(record), this.isModel);
 	}
 
 }

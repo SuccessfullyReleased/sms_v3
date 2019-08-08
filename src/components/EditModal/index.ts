@@ -1,8 +1,8 @@
 import {FormComponentProps} from "antd/es/form";
 
 export interface EditDialogProps<T> extends FormComponentProps {
-	record: T,
+	record: Partial<T>,
 	visible: boolean,
-	onSure: (record: T) => void,
+	onSure: (record: Partial<T>) => void,
 	onCancel: () => void
 }

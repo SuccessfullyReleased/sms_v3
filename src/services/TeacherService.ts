@@ -1,49 +1,64 @@
-import {SingleApi} from "../apis";
-import {HttpServiceResponse, SearchResult} from "./service";
+import {BaseService, HttpServiceResponse, Model, SearchResult} from "./service";
+import {Teacher} from "./TeacherService";
+import md5 from "md5";
 
-export type Teacher = {
-	id?: number,
-	sid?: string,
-	name?: string,
-	password?: string
+export interface Teacher extends Model {
+	tid: string,
+	name: string,
+	password: string
 }
 
-class TeacherService extends SingleApi {
+export const defaultTeacher: Partial<Teacher> = {
+	tid: '',
+	name: '',
+	password: md5('123456')
+};
+
+class TeacherService extends BaseService<Teacher> {
 
 	constructor() {
-		super(TeacherService.name, {
-			baseURL: "/sms/teacher"
-		})
+		super('teacher');
 	}
 
-	selectById(id: number): HttpServiceResponse<Teacher> {
-		return this.request({
-			url: `/id/${id}`
-		});
+	isModel(record: Partial<Teacher>) {
+		return !!(record.tid || record.name);
 	}
 
-	selectOne(Teacher: Teacher): HttpServiceResponse<SearchResult<Teacher>> {
-		return this.request({
-			method: "post",
-			url: '/search',
-			data: Teacher
-		});
+	filter(record: Partial<Teacher>): Partial<Teacher> {
+		console.log(record);
+		if (!record.id) {
+			record.id = undefined;
+		}
+		if (!record.tid) {
+			record.tid = undefined;
+		}
+		if (!record.name) {
+			record.name = undefined;
+		}
+		if (!record.password) {
+			record.password = undefined;
+		}
+		return record;
 	}
 
-	selectAll(): HttpServiceResponse<SearchResult<Teacher>> {
-		return this.request({
-			url: '/list',
-			headers: {
-				noPage: true
-			}
-		});
+	selectOneRecord(record: Partial<Teacher>): HttpServiceResponse<SearchResult<Teacher>> {
+		return super.selectOne(record, this.isModel);
 	}
 
-	update(Teacher: Teacher): HttpServiceResponse<number> {
-		return this.request({
-			method: 'put',
-			data: Teacher
-		})
+	selectRecords(record: Partial<Teacher>, pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Teacher>> {
+		return super.select(record, this.isModel, pageNum, pageSize);
+	}
+
+	selectAllRecords(pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Teacher>> {
+		return super.selectAll(pageNum, pageSize);
+	}
+
+	insertRecord(record: Partial<Teacher>): HttpServiceResponse<number> {
+		return super.insert(this.filter(record), this.isModel);
+	}
+
+	updateRecord(record: Partial<Teacher>): HttpServiceResponse<number> {
+		return super.update(this.filter(record), this.isModel);
 	}
 
 }

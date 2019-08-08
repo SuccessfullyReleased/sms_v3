@@ -18,7 +18,7 @@ export interface BaseManageTableProps<T> {
 export interface ManageTableProps<T> {
 	tableData: Array<T>,
 	pagination: ManagePaginationProps
-	onUpdate: (record: T) => void,
-	onDelete: (record: T) => void,
+	onUpdate: (record: Partial<T>) => void,
+	onDelete: (record: Partial<T>) => void,
 	onSelectionChange: (selectedRowKeys: number[], selectedRows: T[]) => void
 }

@@ -6,7 +6,7 @@ import {Course} from "../../services/CourseService";
 
 interface CourseManageProps extends FormComponentProps {
 	onSearch: (search: Partial<Course>) => void
-	onAdd: () => void
+	onInsert: () => void
 	onBatchDelete: () => void
 }
 
@@ -18,9 +18,9 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 		e.preventDefault();
 		const {getFieldValue} = props.form;
 		props.onSearch({
-			name: getFieldValue('courseName'),
-			type: Number(getFieldValue('courseType')),
-			status: Number(getFieldValue('courseStatus'))
+			name: getFieldValue('CourseName'),
+			type: Number(getFieldValue('CourseType')),
+			status: Number(getFieldValue('CourseStatus'))
 		});
 	};
 
@@ -33,8 +33,8 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 					<Col span={6}>
 						<Form.Item>
 							{
-								getFieldDecorator('courseName')(
-									<Input addonBefore="courseName"/>
+								getFieldDecorator('CourseName')(
+									<Input addonBefore="CourseName"/>
 								)
 							}
 						</Form.Item>
@@ -44,10 +44,10 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 							<Col span={4}>
 								<Form.Item>
 									{
-										getFieldDecorator('courseType')(
+										getFieldDecorator('CourseType')(
 											<Select
 												allowClear
-												placeholder="courseType"
+												placeholder="CourseType"
 											>
 												<Select.Option value="1">Compulsory</Select.Option>
 												<Select.Option value="2">Elective</Select.Option>
@@ -59,10 +59,10 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 							<Col span={4}>
 								<Form.Item>
 									{
-										getFieldDecorator('courseStatus')(
+										getFieldDecorator('CourseStatus')(
 											<Select
 												allowClear
-												placeholder="courseStatus"
+												placeholder="CourseStatus"
 											>
 												<Select.Option value="1">Initial stage</Select.Option>
 												<Select.Option value="2">Selection stage</Select.Option>
@@ -86,24 +86,13 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 						<div>
 							<Button className={styles.Btn} type="primary" onClick={handleCourseSearch}>Search<Icon
 								type="search"/></Button>
-							<Button className={styles.Btn} icon="plus" onClick={props.onAdd}>Add</Button>
+							<Button className={styles.Btn} icon="plus" onClick={props.onInsert}>Add</Button>
 							<Button className={styles.Btn} type="danger" icon="delete" onClick={props.onBatchDelete}>batch
 								deletion</Button>
 						</div>
 					</Col>
 				</Row>
 			</Form>
-			{/*<Row className={styles.RowLine}>*/}
-			{/*	<Col span={2}>*/}
-			{/*		<Button type="primary" onClick={handleCourseSearch}>查找<Icon type="search"/></Button>*/}
-			{/*	</Col>*/}
-			{/*	<Col span={2}>*/}
-			{/*		<Button icon="plus">插入</Button>*/}
-			{/*	</Col>*/}
-			{/*	<Col span={2}>*/}
-			{/*		<Button type="danger" icon="delete">批量删除</Button>*/}
-			{/*	</Col>*/}
-			{/*</Row>*/}
 		</div>
 	);
 };

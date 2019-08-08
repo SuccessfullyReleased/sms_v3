@@ -21,9 +21,9 @@ const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 					if (!err) {
 						props.onSure({
 							id: props.record.id,
-							name: values.courseName as string,
-							type: Number(values.courseType),
-							status: Number(values.courseStatus)
+							name: values.CourseName as string,
+							type: Number(values.CourseType),
+							status: Number(values.CourseStatus)
 						});
 					}
 				});
@@ -32,24 +32,24 @@ const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 			<Form labelCol={{span: 2}} wrapperCol={{span: 20}}>
 				<Form.Item>
 					{
-						getFieldDecorator('courseName', {
+						getFieldDecorator('CourseName', {
 							initialValue: props.record.name,
 							rules: [{
 								required: true,
-								message: <span className={styles.msError}>Please input courseName!</span>
+								message: <span className={styles.msError}>Please input CourseName!</span>
 							}],
 						})(
-							<Input addonBefore="courseName"/>
+							<Input addonBefore="CourseName"/>
 						)
 					}
 				</Form.Item>
 				<Form.Item>
 					{
-						getFieldDecorator('courseType', {
+						getFieldDecorator('CourseType', {
 							initialValue: String(props.record.type)
 						})(
 							<Select
-								placeholder="courseType"
+								placeholder="CourseType"
 							>
 								<Select.Option value="1">Compulsory</Select.Option>
 								<Select.Option value="2">Elective</Select.Option>
@@ -59,11 +59,11 @@ const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 				</Form.Item>
 				<Form.Item>
 					{
-						getFieldDecorator('courseStatus', {
+						getFieldDecorator('CourseStatus', {
 							initialValue: String(props.record.status)
 						})(
 							<Select
-								placeholder="courseStatus"
+								placeholder="CourseStatus"
 							>
 								<Select.Option value="1">Initial stage</Select.Option>
 								<Select.Option value="2">Selection stage</Select.Option>

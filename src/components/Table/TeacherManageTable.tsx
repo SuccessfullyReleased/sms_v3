@@ -1,49 +1,25 @@
 import React, {useState} from 'react';
 import {Button} from "antd";
-import {Course} from "../../services/CourseService";
+import {Teacher} from "../../services/TeacherService";
 import {ColumnProps} from "antd/es/table";
 import styles from './index.module.css';
 import {ManageTableProps} from "./index";
 import ManageTable from "./ManageTable";
-import CourseEditDialog from "../EditModal/CourseEditDialog";
+import TeacherEditDialog from "../EditModal/TeacherEditDialog";
 import DeleteDialog from "../DeleteModal";
 
-const formatCourseStatus = (status: number) => {
-	switch (status) {
-		case 1:
-			return 'Initial stage';
-		case 2:
-			return 'Selection stage';
-		case 3:
-			return 'Teaching stage';
-		case 4:
-			return 'Settlement stage';
-	}
-};
+const TeacherManageTable: React.FC<ManageTableProps<Teacher>> = (props) => {
 
-const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
-
-	const columns: ColumnProps<Course>[] = [{
-		title: 'CourseName',
+	const columns: ColumnProps<Teacher>[] = [{
+		title: 'TeacherID',
+		dataIndex: 'tid',
+		key: 'tid',
+		align: 'center'
+	}, {
+		title: 'TeacherName',
 		dataIndex: 'name',
 		key: 'name',
 		align: 'center'
-	}, {
-		title: 'CourseType',
-		dataIndex: 'type',
-		key: 'type',
-		align: 'center',
-		render: (text, record, index) => (
-			text === 1 ? 'Compulsory' : 'Elective'
-		)
-	}, {
-		title: 'CourseStatus',
-		dataIndex: 'status',
-		key: 'status',
-		align: 'center',
-		render: (text, record, index) => (
-			formatCourseStatus(text)
-		)
 	}, {
 		title: 'Action',
 		key: 'action',
@@ -62,10 +38,10 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 		align: 'center'
 	}];
 
-	const [editRecord, setEditRecord] = useState({} as Course);
+	const [editRecord, setEditRecord] = useState({} as Teacher);
 	const [editStatus, setEditStatus] = useState(false);
 
-	const [deleteRecord, setDeleteRecord] = useState({} as Course);
+	const [deleteRecord, setDeleteRecord] = useState({} as Teacher);
 	const [deleteStatus, setDeleteStatus] = useState(false);
 
 	const handleEdit = (record: any, index: number) => {
@@ -78,26 +54,26 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 		setDeleteStatus(true);
 	};
 
-	const handleRecordUpdate = (record: Partial<Course>) => {
+	const handleRecordUpdate = (record: Partial<Teacher>) => {
 		setEditStatus(false);
-		setEditRecord({} as Course);
+		setEditRecord({} as Teacher);
 		props.onUpdate(record);
 	};
 
 	const handleRecordUpdateCancel = () => {
 		setEditStatus(false);
-		setEditRecord({} as Course);
+		setEditRecord({} as Teacher);
 	};
 
-	const handleRecordDelete = (record: Course | Course[]) => {
+	const handleRecordDelete = (record: Teacher | Teacher[]) => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Course);
-		props.onDelete(record as Course);
+		setDeleteRecord({} as Teacher);
+		props.onDelete(record as Teacher);
 	};
 
 	const handleRecordDeleteCancel = () => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Course);
+		setDeleteRecord({} as Teacher);
 	};
 
 	return (
@@ -106,10 +82,10 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 									 tableData={props.tableData}
 									 pagination={props.pagination}
 									 onSelectionChange={props.onSelectionChange}/>
-			<CourseEditDialog record={editRecord}
-												visible={editStatus}
-												onSure={handleRecordUpdate}
-												onCancel={handleRecordUpdateCancel}/>
+			<TeacherEditDialog record={editRecord}
+												 visible={editStatus}
+												 onSure={handleRecordUpdate}
+												 onCancel={handleRecordUpdateCancel}/>
 			<DeleteDialog record={deleteRecord}
 										visible={deleteStatus}
 										onSure={handleRecordDelete}
@@ -118,4 +94,4 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 	);
 };
 
-export default CourseManageTable;
+export default TeacherManageTable;

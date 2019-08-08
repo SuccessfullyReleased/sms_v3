@@ -1,48 +1,52 @@
-import {SingleApi} from "../apis";
-import {HttpServiceResponse, SearchResult} from "./service";
+import {BaseService, HttpServiceResponse, Model, SearchResult} from "./service";
 
-export type Manager = {
-	id?: number,
-	name?: string,
-	password?: string
+export interface Manager extends Model {
+	name: string,
+	password: string
 }
 
-class ManagerService extends SingleApi {
+class ManagerService extends BaseService<Manager> {
 
 	constructor() {
-		super(ManagerService.name, {
-			baseURL: "/sms/manager"
-		})
+		super('manager');
 	}
 
-	selectById(id: number): HttpServiceResponse<Manager> {
-		return this.request({
-			url: `/id/${id}`
-		});
+	isModel(record: Partial<Manager>): boolean {
+		return !!(record.name || record.name);
 	}
 
-	selectOne(Manager: Manager): HttpServiceResponse<SearchResult<Manager>> {
-		return this.request({
-			method: "post",
-			url: '/search',
-			data: Manager
-		});
+	filter(record: Partial<Manager>): Partial<Manager> {
+		console.log(record);
+		if (!record.id) {
+			record.id = undefined;
+		}
+		if (!record.name) {
+			record.name = undefined;
+		}
+		if (!record.password) {
+			record.password = undefined;
+		}
+		return record;
 	}
 
-	selectAll(): HttpServiceResponse<SearchResult<Manager>> {
-		return this.request({
-			url: '/list',
-			headers: {
-				noPage: true
-			}
-		});
+	selectOneRecord(record: Partial<Manager>): HttpServiceResponse<SearchResult<Manager>> {
+		return super.selectOne(record, this.isModel);
 	}
 
-	update(Manager: Manager): HttpServiceResponse<number> {
-		return this.request({
-			method: 'put',
-			data: Manager
-		})
+	selectRecords(record: Partial<Manager>, pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Manager>> {
+		return super.select(record, this.isModel, pageNum, pageSize);
+	}
+
+	selectAllRecords(pageNum?: number, pageSize?: number): HttpServiceResponse<SearchResult<Manager>> {
+		return super.selectAll(pageNum, pageSize);
+	}
+
+	insertRecord(record: Partial<Manager>): HttpServiceResponse<number> {
+		return super.insert(this.filter(record), this.isModel);
+	}
+
+	updateRecord(record: Partial<Manager>): HttpServiceResponse<number> {
+		return super.update(this.filter(record), this.isModel);
 	}
 
 }

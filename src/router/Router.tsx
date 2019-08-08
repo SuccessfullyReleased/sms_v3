@@ -7,7 +7,9 @@ const Login = lazy(() => import("../pages/Login"));
 const ErrorPage = lazy(() => import("../pages/Error"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Setting = lazy(() => import('../pages/Setting'));
-const CourseManage = lazy(() => import('../pages/CourseManage'));
+const CourseManage = lazy(() => import('../pages/Manage/CourseManage'));
+const StudentManage = lazy(() => import('../pages/Manage/StudentManage'));
+const TeacherManage = lazy(() => import('../pages/Manage/TeacherManage'));
 
 export class AppRouter extends React.Component {
 
@@ -59,6 +61,8 @@ export class MainRouter extends React.Component {
 						<Route exact path="/main/dashboard" component={Dashboard}/>
 						<Route exact path="/main/setting" component={Setting}/>
 						<Route exact path="/main/course-manage" component={CourseManage}/>
+						<Route exact path="/main/student-manage" component={StudentManage}/>
+						<Route exact path="/main/teacher-manage" component={TeacherManage}/>
 						<Route component={ErrorPage}/>
 					</Switch>
 				</Suspense>

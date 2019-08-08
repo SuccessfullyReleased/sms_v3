@@ -1,44 +1,26 @@
 import React from 'react';
-import CourseManageSearch from "../../components/Search/CourseManageSearch";
-import CourseManageTable from "../../components/Table/CourseManageTable";
-import CourseService, {Course} from "../../services/CourseService";
-import {ManagePaginationProps} from "../../components/Table";
-import {PageInfo} from "../../services/service";
+import CourseManageSearch from "../../../components/Search/CourseManageSearch";
+import CourseManageTable from "../../../components/Table/CourseManageTable";
+import CourseService, {Course, defaultCourse} from "../../../services/CourseService";
+import {PageInfo} from "../../../services/service";
 import {message} from "antd";
-import CourseEditDialog from "../../components/EditModal/CourseEditDialog";
-import DeleteDialog from "../../components/DeleteModal/index";
+import CourseEditDialog from "../../../components/EditModal/CourseEditDialog";
+import DeleteDialog from "../../../components/DeleteModal";
+import {ManageState} from "../index";
 
-interface CourseManageState {
-	tableData: Array<Course>,
-	pagination: Omit<Omit<ManagePaginationProps, 'onChange'>, 'onShowSizeChange'>,
-	search: Partial<Course>,
-	addRecord: Course,
-	addStatus: boolean,
-	batchDeleteRecords: Array<number>,
-	batchDeleteStatus: boolean
-}
 
-class CourseManage extends React.Component<{}, CourseManageState> {
+class CourseManage extends React.Component<{}, ManageState<Course>> {
 
-	state: CourseManageState = {
+	state: ManageState<Course> = {
 		tableData: [],
 		pagination: {
 			current: 1,
 			pageSize: 5,
 			total: NaN,
 		},
-		search: {
-			name: undefined,
-			type: undefined,
-			status: undefined
-		},
-		addRecord: {
-			id: 0,
-			name: '',
-			type: 1,
-			status: 1
-		},
-		addStatus: false,
+		search: defaultCourse,
+		insertRecord: defaultCourse,
+		insertStatus: false,
 		batchDeleteRecords: [],
 		batchDeleteStatus: false
 	};
@@ -48,12 +30,12 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 	}
 
 	handleSearchCommand = (search: Partial<Course>) => {
-		this.getData(CourseService.filter(search), this.state.pagination.current, this.state.pagination.pageSize);
+		this.getData(search, this.state.pagination.current, this.state.pagination.pageSize);
 	};
 
 	handleInsertCommand = () => {
 		this.setState({
-			addStatus: true
+			insertStatus: true
 		});
 	};
 
@@ -63,8 +45,8 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 		})
 	};
 
-	handleUpdate = (course: Course) => {
-		CourseService.update(course).then(() => {
+	handleUpdate = (record: Partial<Course>) => {
+		CourseService.updateRecord(record).then(() => {
 			message.success("Update completed！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
 		}).catch(() => {
@@ -72,8 +54,8 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 		})
 	};
 
-	handleDelete = (course: Course) => {
-		CourseService.deleteById(course.id).then(() => {
+	handleDelete = (record: Partial<Course>) => {
+		CourseService.deleteById(record.id as number).then(() => {
 			message.success("Successfully deleted！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
 		}).catch(() => {
@@ -89,17 +71,12 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 		this.getData(this.state.search, current, size);
 	};
 
-	handleInsert = (record: Course) => {
+	handleInsert = (record: Partial<Course>) => {
 		this.setState({
-			addRecord: {
-				id: 0,
-				name: '',
-				type: 1,
-				status: 1
-			},
-			addStatus: false
+			insertRecord: defaultCourse,
+			insertStatus: false
 		});
-		CourseService.insert(CourseService.filter(record)).then(() => {
+		CourseService.insertRecord(record).then(() => {
 			message.success("Successfully saved！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
 		}).catch(() => {
@@ -108,13 +85,8 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 	};
 	handleInsertCancel = () => {
 		this.setState({
-			addRecord: {
-				id: 0,
-				name: '',
-				type: 1,
-				status: 1
-			},
-			addStatus: false
+			insertRecord: defaultCourse,
+			insertStatus: false
 		});
 	};
 
@@ -148,7 +120,7 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 	render() {
 		return (
 			<div>
-				<CourseManageSearch onSearch={this.handleSearchCommand} onAdd={this.handleInsertCommand}
+				<CourseManageSearch onSearch={this.handleSearchCommand} onInsert={this.handleInsertCommand}
 														onBatchDelete={this.handleBatchDeleteCommand}/>
 				<CourseManageTable tableData={this.state.tableData}
 													 onUpdate={this.handleUpdate}
@@ -160,8 +132,8 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 													 }}
 													 onSelectionChange={this.handleSelectionChange}
 				/>
-				<CourseEditDialog record={this.state.addRecord}
-													visible={this.state.addStatus}
+				<CourseEditDialog record={this.state.insertRecord}
+													visible={this.state.insertStatus}
 													onSure={this.handleInsert}
 													onCancel={this.handleInsertCancel}/>
 				<DeleteDialog record={this.state.batchDeleteRecords}
@@ -174,7 +146,7 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 
 	getData = (search: Partial<Course>, pageNum: number, pageSize: number) => {
 		console.log(search);
-		CourseService.select(search, pageNum, pageSize).then(res => {
+		CourseService.selectRecords(CourseService.filter(search), pageNum, pageSize).then(res => {
 			const data: PageInfo<Course> = res.data.data as PageInfo<Course>;
 			this.setState({
 				tableData: data.list,
@@ -183,11 +155,7 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 					pageSize: data.pageSize,
 					total: data.total
 				},
-				search: {
-					name: search.name,
-					type: search.type,
-					status: search.status
-				}
+				search: search
 			});
 		})
 	}

@@ -1,5 +1,4 @@
 import {SingleApi} from "../apis";
-import md5 from 'md5'
 import StudentService, {Student} from "./StudentService";
 import {message} from "antd";
 import TeacherService, {Teacher} from "./TeacherService";
@@ -25,7 +24,7 @@ class UserService extends SingleApi {
 	}
 
 	login(user: Required<User>): HttpServiceResponse<Student | Teacher | Manager> {
-		user.password = md5(`${user.account}${user.password}`);
+		// user.password = md5(`${user.account}${user.password}`);
 		return this.request({
 			method: "post",
 			url: "/verify",
@@ -36,6 +35,7 @@ class UserService extends SingleApi {
 	verify(password: string): HttpServiceResponse<Student | Teacher | Manager> {
 		const role = localStorage.getItem('sms_role');
 		const account = localStorage.getItem('sms_account');
+		// password = md5(`${account}${password}`);
 		if (role && account) {
 			return this.request({
 				method: "post",
@@ -43,7 +43,7 @@ class UserService extends SingleApi {
 				data: {
 					role: Number(role),
 					account: account,
-					password: md5(`${account}${password}`)
+					password: password
 				}
 			})
 		} else {
@@ -62,24 +62,24 @@ class UserService extends SingleApi {
 		const id = localStorage.getItem('sms_id');
 		const role = localStorage.getItem('sms_role');
 		const account = localStorage.getItem('sms_account');
-		password = md5(`${account}${password}`);
+		// password = md5(`${account}${password}`);
 		switch (role) {
 			case STUDENT:
-				StudentService.update({id: Number(id), password}).then(res => {
+				StudentService.updateRecord({id: Number(id), password}).then(res => {
 					message.success("修改成功");
 				}).catch(err => {
 					message.error("修改失败");
 				});
 				break;
 			case TEACHER:
-				TeacherService.update({id: Number(id), password}).then(res => {
+				TeacherService.updateRecord({id: Number(id), password}).then(res => {
 					message.success("修改成功");
 				}).catch(err => {
 					message.error("修改失败");
 				});
 				break;
 			case MANAGER:
-				ManagerService.update({id: Number(id), password}).then(res => {
+				ManagerService.updateRecord({id: Number(id), password}).then(res => {
 					message.success("修改成功");
 				}).catch(err => {
 					message.error("修改失败");
