@@ -47,7 +47,7 @@ class CourseService extends SingleApi {
 			if (pageNum && pageSize) {
 				return this.request({
 					method: 'post',
-					url: '/search/list',
+					url: '/list/search',
 					headers: {
 						pageNum, pageSize
 					},
@@ -56,7 +56,7 @@ class CourseService extends SingleApi {
 			} else {
 				return this.request({
 					method: 'post',
-					url: '/search/list',
+					url: '/list/search',
 					headers: {
 						noPage: true
 					},
@@ -104,6 +104,13 @@ class CourseService extends SingleApi {
 		return this.request({
 			method: 'delete',
 			url: `/id/${id}`
+		})
+	}
+
+	deleteByIds(ids: number[]): HttpServiceResponse<number> {
+		return this.request({
+			method: 'delete',
+			url: `/list/${ids.join(',')}`
 		})
 	}
 

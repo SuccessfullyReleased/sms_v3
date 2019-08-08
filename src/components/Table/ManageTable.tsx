@@ -15,6 +15,12 @@ function ManageTable<T>(props: BaseManageTableProps<T>) {
 			return originalElement;
 		};
 
+	const rowSelection = {
+		onChange: (selectedRowKeys: string[] | number[], selectedRows: T[]) => {
+			props.onSelectionChange(selectedRowKeys as number[], selectedRows);
+		}
+	};
+
 	return (
 		<div className="container">
 			{
@@ -22,6 +28,7 @@ function ManageTable<T>(props: BaseManageTableProps<T>) {
 					<Table dataSource={props.tableData}
 								 columns={props.columns}
 								 rowKey={'id'}
+								 rowSelection={rowSelection}
 								 pagination={{
 									 ...props.pagination,
 									 defaultCurrent: 1,

@@ -3,10 +3,10 @@ import {Button} from "antd";
 import {Course} from "../../services/CourseService";
 import {ColumnProps} from "antd/es/table";
 import styles from './index.module.css';
-import CourseEditDialog from "../EditModal/CourseEditDialog";
-import CourseDeleteDialog from "../DeleteModal/CourseDeleteDialog";
 import {ManageTableProps} from "./index";
 import ManageTable from "./ManageTable";
+import CourseEditDialog from "../EditModal/CourseEditDialog";
+import DeleteDialog from "../DeleteModal";
 
 const formatCourseStatus = (status: number) => {
 	switch (status) {
@@ -89,10 +89,10 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 		setEditRecord({} as Course);
 	};
 
-	const handleRecordDelete = (course: Course) => {
+	const handleRecordDelete = (course: Course | Course[]) => {
 		setDeleteStatus(false);
 		setDeleteRecord({} as Course);
-		props.onDelete(course);
+		props.onDelete(course as Course);
 	};
 
 	const handleRecordDeleteCancel = () => {
@@ -102,15 +102,18 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 
 	return (
 		<div className="container">
-			<ManageTable columns={courseColumns} tableData={props.tableData} pagination={props.pagination}/>
+			<ManageTable columns={courseColumns}
+									 tableData={props.tableData}
+									 pagination={props.pagination}
+									 onSelectionChange={props.onSelectionChange}/>
 			<CourseEditDialog record={editRecord}
 												visible={editStatus}
 												onSure={handleRecordUpdate}
 												onCancel={handleRecordUpdateCancel}/>
-			<CourseDeleteDialog record={deleteRecord}
-													visible={deleteStatus}
-													onSure={handleRecordDelete}
-													onCancel={handleRecordDeleteCancel}/>
+			<DeleteDialog record={deleteRecord}
+										visible={deleteStatus}
+										onSure={handleRecordDelete}
+										onCancel={handleRecordDeleteCancel}/>
 		</div>
 	);
 };

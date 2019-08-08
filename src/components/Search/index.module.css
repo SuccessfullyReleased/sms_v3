@@ -1,8 +1,18 @@
 
 .MoreLink {
-	line-height: 32px;
+	line-height: 40px;
+	color: #20a0ff;
 }
 
-.RowLine {
-	margin-top: 20px;
+.MoreLink:hover {
+	color: #2d8cf0;
+	cursor: pointer;
 }
+
+.Btn {
+	margin: 4px 10px 4px 10px;
+}
+
+/*.RowLine {*/
+/*	margin-top: 20px;*/
+/*}*/

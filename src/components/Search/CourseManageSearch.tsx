@@ -82,14 +82,14 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 							<span className={styles.MoreLink} onClick={() => setExpanded(true)}>More<Icon type="down"/></span>
 						</Col>
 					}
-					<Col span={2}>
-						<Button type="primary" onClick={handleCourseSearch}>Search<Icon type="search"/></Button>
-					</Col>
-					<Col span={2}>
-						<Button icon="plus" onClick={props.onAdd}>Add</Button>
-					</Col>
-					<Col span={3}>
-						<Button type="danger" icon="delete" onClick={props.onBatchDelete}>batch deletion</Button>
+					<Col span={8}>
+						<div>
+							<Button className={styles.Btn} type="primary" onClick={handleCourseSearch}>Search<Icon
+								type="search"/></Button>
+							<Button className={styles.Btn} icon="plus" onClick={props.onAdd}>Add</Button>
+							<Button className={styles.Btn} type="danger" icon="delete" onClick={props.onBatchDelete}>batch
+								deletion</Button>
+						</div>
 					</Col>
 				</Row>
 			</Form>

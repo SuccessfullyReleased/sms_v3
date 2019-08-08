@@ -1,11 +1,15 @@
 import React from 'react';
 import {Modal} from 'antd';
-
-import {Course} from "../../services/CourseService";
 import {DeleteDialogProps} from "./index";
 
+export interface DeleteDialogProps<T> {
+	record: T | T[],
+	visible: boolean,
+	onSure: (record: T | T[]) => void,
+	onCancel: () => void
+}
 
-const CourseDeleteDialog: React.FC<DeleteDialogProps<Course>> = (props) => {
+function DeleteDialog<T>(props: DeleteDialogProps<T>) {
 	return (
 		<Modal
 			okType="danger"
@@ -26,6 +30,6 @@ const CourseDeleteDialog: React.FC<DeleteDialogProps<Course>> = (props) => {
 			</div>
 		</Modal>
 	)
-};
+}
 
-export default CourseDeleteDialog;
+export default DeleteDialog;

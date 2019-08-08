@@ -6,13 +6,16 @@ import {ManagePaginationProps} from "../../components/Table";
 import {PageInfo} from "../../services/service";
 import {message} from "antd";
 import CourseEditDialog from "../../components/EditModal/CourseEditDialog";
+import DeleteDialog from "../../components/DeleteModal/index";
 
 interface CourseManageState {
 	tableData: Array<Course>,
 	pagination: Omit<Omit<ManagePaginationProps, 'onChange'>, 'onShowSizeChange'>,
 	search: Partial<Course>,
 	addRecord: Course,
-	addStatus: boolean
+	addStatus: boolean,
+	batchDeleteRecords: Array<number>,
+	batchDeleteStatus: boolean
 }
 
 class CourseManage extends React.Component<{}, CourseManageState> {
@@ -35,41 +38,45 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 			type: 1,
 			status: 1
 		},
-		addStatus: false
+		addStatus: false,
+		batchDeleteRecords: [],
+		batchDeleteStatus: false
 	};
 
 	componentDidMount() {
 		this.getData({}, this.state.pagination.current, this.state.pagination.pageSize);
 	}
 
-	handleSearch = (search: Partial<Course>) => {
+	handleSearchCommand = (search: Partial<Course>) => {
 		this.getData(CourseService.filter(search), this.state.pagination.current, this.state.pagination.pageSize);
 	};
 
-	handleAdd = () => {
+	handleInsertCommand = () => {
 		this.setState({
 			addStatus: true
 		});
 	};
 
-	handleBatchDelete = () => {
-
+	handleBatchDeleteCommand = () => {
+		this.setState({
+			batchDeleteStatus: true
+		})
 	};
 
 	handleUpdate = (course: Course) => {
-		CourseService.update(course).then(res => {
+		CourseService.update(course).then(() => {
 			message.success("Update completed！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
-		}).catch(err => {
+		}).catch(() => {
 			message.error("Update failed！")
 		})
 	};
 
 	handleDelete = (course: Course) => {
-		CourseService.deleteById(course.id).then(res => {
+		CourseService.deleteById(course.id).then(() => {
 			message.success("Successfully deleted！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
-		}).catch(err => {
+		}).catch(() => {
 			message.error("Failed to delete！")
 		})
 	};
@@ -82,7 +89,7 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 		this.getData(this.state.search, current, size);
 	};
 
-	handleRecordInsert = (record: Course) => {
+	handleInsert = (record: Course) => {
 		this.setState({
 			addRecord: {
 				id: 0,
@@ -92,14 +99,14 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 			},
 			addStatus: false
 		});
-		CourseService.insert(CourseService.filter(record)).then(res => {
+		CourseService.insert(CourseService.filter(record)).then(() => {
 			message.success("Successfully saved！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
-		}).catch(err => {
+		}).catch(() => {
 			message.error("Save failed！")
 		})
 	};
-	handleRecordInsertCancel = () => {
+	handleInsertCancel = () => {
 		this.setState({
 			addRecord: {
 				id: 0,
@@ -111,10 +118,38 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 		});
 	};
 
+	handleSelectionChange = (selectedRowKeys: number[]) => {
+		this.setState({
+			batchDeleteRecords: selectedRowKeys
+		});
+	};
+
+	handleBatchDelete = (records: number | number[]) => {
+		CourseService.deleteByIds(records as number[]).then(() => {
+			this.setState({
+				batchDeleteStatus: false
+			});
+			message.success("Successfully deleted！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			this.setState({
+				batchDeleteStatus: false
+			});
+			message.error("Failed to delete！")
+		})
+	};
+
+	handleBatchDeleteCancel = () => {
+		this.setState({
+			batchDeleteStatus: false
+		});
+	};
+
 	render() {
 		return (
 			<div>
-				<CourseManageSearch onSearch={this.handleSearch} onAdd={this.handleAdd} onBatchDelete={this.handleBatchDelete}/>
+				<CourseManageSearch onSearch={this.handleSearchCommand} onAdd={this.handleInsertCommand}
+														onBatchDelete={this.handleBatchDeleteCommand}/>
 				<CourseManageTable tableData={this.state.tableData}
 													 onUpdate={this.handleUpdate}
 													 onDelete={this.handleDelete}
@@ -122,11 +157,17 @@ class CourseManage extends React.Component<{}, CourseManageState> {
 														 ...this.state.pagination,
 														 onChange: this.handlePageChange,
 														 onShowSizeChange: this.handleShowSizeChange
-													 }}/>
+													 }}
+													 onSelectionChange={this.handleSelectionChange}
+				/>
 				<CourseEditDialog record={this.state.addRecord}
 													visible={this.state.addStatus}
-													onSure={this.handleRecordInsert}
-													onCancel={this.handleRecordInsertCancel}/>
+													onSure={this.handleInsert}
+													onCancel={this.handleInsertCancel}/>
+				<DeleteDialog record={this.state.batchDeleteRecords}
+											visible={this.state.batchDeleteStatus}
+											onSure={this.handleBatchDelete}
+											onCancel={this.handleBatchDeleteCancel}/>
 			</div>
 		);
 	}

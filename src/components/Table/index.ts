@@ -11,7 +11,8 @@ export interface ManagePaginationProps {
 export interface BaseManageTableProps<T> {
 	columns: ColumnProps<T>[];
 	tableData: Array<T>,
-	pagination: ManagePaginationProps
+	pagination: ManagePaginationProps,
+	onSelectionChange: (selectedRowKeys: number[], selectedRows: T[]) => void
 }
 
 export interface ManageTableProps<T> {
@@ -19,4 +20,5 @@ export interface ManageTableProps<T> {
 	pagination: ManagePaginationProps
 	onUpdate: (record: T) => void,
 	onDelete: (record: T) => void,
+	onSelectionChange: (selectedRowKeys: number[], selectedRows: T[]) => void
 }
