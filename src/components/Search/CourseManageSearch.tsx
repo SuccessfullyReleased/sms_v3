@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
 import {Button, Col, Form, Icon, Input, Row, Select} from "antd";
 import styles from './index.module.css';
-import {FormComponentProps} from "antd/es/form";
 import {Course} from "../../services/CourseService";
+import {ManageSearchProps} from "./index";
 
-interface CourseManageProps extends FormComponentProps {
-	onSearch: (search: Partial<Course>) => void
-	onInsert: () => void
-	onBatchDelete: () => void
-}
-
-const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
-
+/*
+ * @class CourseManageSearchContent
+ * @description 课程管理界面的搜索组件的内容
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:54
+ **/
+const CourseManageSearchContent: React.FC<ManageSearchProps<Course>> = (props) => {
+	/*
+	 * @var 是否展开搜索组件
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 22:56
+	 **/
 	const [expanded, setExpanded] = useState(false);
 
 	const handleCourseSearch: React.MouseEventHandler = (e) => {
@@ -97,6 +101,6 @@ const CourseManageSearchContent: React.FC<CourseManageProps> = (props) => {
 	);
 };
 
-const CourseManageSearch = Form.create<CourseManageProps>({})(CourseManageSearchContent);
+const CourseManageSearch = Form.create<ManageSearchProps<Course>>({})(CourseManageSearchContent);
 
 export default CourseManageSearch;

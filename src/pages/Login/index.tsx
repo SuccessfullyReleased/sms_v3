@@ -6,13 +6,31 @@ import styles from './index.module.css';
 import {FormComponentProps} from "antd/es/form";
 import UserService from "../../services/UserService";
 
-
+/*
+ * @class LoginProps
+ * @description 登录界面props
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:41
+ **/
 interface LoginProps extends RouteComponentProps, FormComponentProps {
 }
 
+/**
+ * @class Login
+ * @description 登录界面
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:41
+ **/
 const Login: React.FC<LoginProps> = (props) => {
 
 	const handleSubmit: React.MouseEventHandler<HTMLElement> = (e) => {
+		/*
+		 * @method handleSubmit
+		 * @param 点击事件事件对象
+		 * @description 提交表单，登录
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:42
+		 **/
 		e.preventDefault();
 		props.form.validateFields((err, values) => {
 			if (!err) {

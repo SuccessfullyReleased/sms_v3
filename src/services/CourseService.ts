@@ -1,4 +1,4 @@
-import {BaseService, HttpServiceResponse, Model, PageInfo, SearchResult} from "./service";
+import {BaseService, HttpServiceResponse, Model, SearchResult} from "./service";
 
 export interface Course extends Model {
 	name: string,
@@ -16,6 +16,32 @@ export const CourseStatus = {
 	Selection: 2,
 	Teaching: 3,
 	Settlement: 4
+};
+
+export const formatCourseType = (status: number) => {
+	switch (status) {
+		case 1:
+			return 'Compulsory';
+		case 2:
+			return 'Elective';
+		default:
+			return 'ERROR';
+	}
+};
+
+export const formatCourseStatus = (status: number) => {
+	switch (status) {
+		case 1:
+			return 'Initial stage';
+		case 2:
+			return 'Selection stage';
+		case 3:
+			return 'Teaching stage';
+		case 4:
+			return 'Settlement stage';
+		default:
+			return 'ERROR';
+	}
 };
 
 export const defaultCourse: Partial<Course> = {

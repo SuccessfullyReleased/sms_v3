@@ -1,16 +1,16 @@
 import React from 'react';
 import {Button, Col, Form, Icon, Input, Row} from "antd";
 import styles from './index.module.css';
-import {FormComponentProps} from "antd/es/form";
 import {Student} from "../../services/StudentService";
+import {ManageSearchProps} from "./index";
 
-interface StudentManageProps extends FormComponentProps {
-	onSearch: (search: Partial<Student>) => void
-	onInsert: () => void
-	onBatchDelete: () => void
-}
-
-const StudentManageSearchContent: React.FC<StudentManageProps> = (props) => {
+/*
+ * @class StudentManageSearchContent
+ * @description 学生管理界面的搜索组件的内容
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:54
+ **/
+const StudentManageSearchContent: React.FC<ManageSearchProps<Student>> = (props) => {
 
 	const handleStudentSearch: React.MouseEventHandler = (e) => {
 		e.preventDefault();
@@ -60,6 +60,6 @@ const StudentManageSearchContent: React.FC<StudentManageProps> = (props) => {
 	);
 };
 
-const StudentManageSearch = Form.create<StudentManageProps>({})(StudentManageSearchContent);
+const StudentManageSearch = Form.create<ManageSearchProps<Student>>({})(StudentManageSearchContent);
 
 export default StudentManageSearch;

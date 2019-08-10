@@ -1,16 +1,16 @@
 import React from 'react';
 import {Button, Col, Form, Icon, Input, Row} from "antd";
 import styles from './index.module.css';
-import {FormComponentProps} from "antd/es/form";
 import {Teacher} from "../../services/TeacherService";
+import {ManageSearchProps} from "./index";
 
-interface TeacherManageProps extends FormComponentProps {
-	onSearch: (search: Partial<Teacher>) => void
-	onInsert: () => void
-	onBatchDelete: () => void
-}
-
-const TeacherManageSearchContent: React.FC<TeacherManageProps> = (props) => {
+/*
+ * @class TeacherManageSearchContent
+ * @description 教师管理界面的搜索组件的内容
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:54
+ **/
+const TeacherManageSearchContent: React.FC<ManageSearchProps<Teacher>> = (props) => {
 
 	const handleTeacherSearch: React.MouseEventHandler = (e) => {
 		e.preventDefault();
@@ -60,6 +60,6 @@ const TeacherManageSearchContent: React.FC<TeacherManageProps> = (props) => {
 	);
 };
 
-const TeacherManageSearch = Form.create<TeacherManageProps>({})(TeacherManageSearchContent);
+const TeacherManageSearch = Form.create<ManageSearchProps<Teacher>>({})(TeacherManageSearchContent);
 
 export default TeacherManageSearch;

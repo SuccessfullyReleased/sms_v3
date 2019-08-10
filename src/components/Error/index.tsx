@@ -3,13 +3,39 @@ import {Link, RouteComponentProps, withRouter} from 'react-router-dom';
 import {Button} from 'antd';
 import styles from './index.module.css';
 
+/*
+ * @class ErrorProps
+ * @description 错误组件props
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:47
+ **/
 export interface ErrorProps extends RouteComponentProps {
+	/*
+	 * @var 错误代码
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 22:47
+	 **/
 	code?: string,
+	/*
+	 * @var 错误提示
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 22:47
+	 **/
 	tips?: string
 }
-
+/*
+ * @class Error
+ * @description 错误组件
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:47
+ **/
 class Error extends React.Component<ErrorProps> {
 
+	/*
+	 * @var 默认错误
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 22:48
+	 **/
 	static defaultProps = {
 		code: '404',
 		tips: '啊哦~ 你所访问的页面不存在'

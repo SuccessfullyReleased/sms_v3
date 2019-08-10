@@ -1,11 +1,16 @@
 import React from 'react';
 import {Form, Input, Modal} from 'antd';
-import {Teacher} from "../../services/TeacherService";
+import {Student} from "../../../services/StudentService";
 import styles from './index.module.css';
 import {EditDialogProps} from "./index";
 
-
-const EditDialogContent: React.FC<EditDialogProps<Teacher>> = (props) => {
+/*
+ * @class EditDialogContent
+ * @description 学生的编辑模态框
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:38
+ **/
+const EditDialogContent: React.FC<EditDialogProps<Student>> = (props) => {
 
 	const {getFieldDecorator} = props.form;
 
@@ -21,8 +26,8 @@ const EditDialogContent: React.FC<EditDialogProps<Teacher>> = (props) => {
 					if (!err) {
 						props.onSure({
 							id: props.record.id,
-							tid: values.TeacherID as string,
-							name: values.TeacherName as string
+							sid: values.StudentID as string,
+							name: values.StudentName as string
 						});
 					}
 				});
@@ -31,27 +36,27 @@ const EditDialogContent: React.FC<EditDialogProps<Teacher>> = (props) => {
 			<Form labelCol={{span: 2}} wrapperCol={{span: 20}}>
 				<Form.Item>
 					{
-						getFieldDecorator('TeacherID', {
+						getFieldDecorator('StudentID', {
 							initialValue: props.record.name,
 							rules: [{
 								required: true,
-								message: <span className={styles.msError}>Please input TeacherName!</span>
+								message: <span className={styles.invalid}>Please input StudentName!</span>
 							}],
 						})(
-							<Input addonBefore="TeacherID"/>
+							<Input addonBefore="StudentID"/>
 						)
 					}
 				</Form.Item>
 				<Form.Item>
 					{
-						getFieldDecorator('TeacherName', {
+						getFieldDecorator('StudentName', {
 							initialValue: props.record.name,
 							rules: [{
 								required: true,
-								message: <span className={styles.msError}>Please input TeacherName!</span>
+								message: <span className={styles.invalid}>Please input StudentName!</span>
 							}],
 						})(
-							<Input addonBefore="TeacherName"/>
+							<Input addonBefore="StudentName"/>
 						)
 					}
 				</Form.Item>
@@ -61,6 +66,6 @@ const EditDialogContent: React.FC<EditDialogProps<Teacher>> = (props) => {
 
 };
 
-const TeacherEditDialog = Form.create<EditDialogProps<Teacher>>({})(EditDialogContent);
+const StudentEditDialog = Form.create<EditDialogProps<Student>>({})(EditDialogContent);
 
-export default TeacherEditDialog;
+export default StudentEditDialog;

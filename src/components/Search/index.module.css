@@ -1,18 +1,22 @@
-
+/*展开收缩的点击文字正常*/
 .MoreLink {
 	line-height: 40px;
 	color: #20a0ff;
 }
 
+/*展开收缩的点击文字，鼠标悬停*/
 .MoreLink:hover {
 	color: #2d8cf0;
 	cursor: pointer;
+	/*鼠标变成小手*/
 }
 
+/*搜索组件的按钮之间的间隔*/
 .Btn {
 	margin: 4px 10px 4px 10px;
 }
 
-/*.RowLine {*/
-/*	margin-top: 20px;*/
-/*}*/
+/*修复AutoComplete组件的Bug,滚动条拉到底，该组件悬浮在Header组件之上*/
+.Complete {
+	z-index: 0;
+}

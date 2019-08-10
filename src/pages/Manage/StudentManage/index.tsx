@@ -4,11 +4,17 @@ import StudentManageTable from "../../../components/Table/StudentManageTable";
 import StudentService, {defaultStudent, Student} from "../../../services/StudentService";
 import {PageInfo} from "../../../services/service";
 import {message} from "antd";
-import StudentEditDialog from "../../../components/EditModal/StudentEditDialog";
-import DeleteDialog from "../../../components/DeleteModal";
+import StudentEditDialog from "../../../components/Dialog/EditModal/StudentEditDialog";
+import {DeleteDialog} from "../../../components/Dialog/DeleteModal";
 import {ManageState} from "../index";
 
-
+/*
+ * @class StudentManage
+ * @description 学生管理界面
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/11 0:01
+ * @see CourseManage
+ **/
 class StudentManage extends React.Component<{}, ManageState<Student>> {
 
 	state: ManageState<Student> = {
@@ -63,7 +69,7 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		})
 	};
 
-	handlePageChange = (page: number, pageSize?: number | undefined) => {
+	handlePageChange = (page: number, pageSize?: number) => {
 		this.getData(this.state.search, page, pageSize as number);
 	};
 
@@ -96,8 +102,8 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		});
 	};
 
-	handleBatchDelete = (records: number | number[]) => {
-		StudentService.deleteByIds(records as number[]).then(() => {
+	handleBatchDelete = (ids: number[]) => {
+		StudentService.deleteByIds(ids).then(() => {
 			this.setState({
 				batchDeleteStatus: false
 			});
@@ -121,21 +127,21 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		return (
 			<div>
 				<StudentManageSearch onSearch={this.handleSearchCommand} onInsert={this.handleInsertCommand}
-														onBatchDelete={this.handleBatchDeleteCommand}/>
+														 onBatchDelete={this.handleBatchDeleteCommand}/>
 				<StudentManageTable tableData={this.state.tableData}
-													 onUpdate={this.handleUpdate}
-													 onDelete={this.handleDelete}
-													 pagination={{
-														 ...this.state.pagination,
-														 onChange: this.handlePageChange,
-														 onShowSizeChange: this.handleShowSizeChange
-													 }}
-													 onSelectionChange={this.handleSelectionChange}
+														onUpdate={this.handleUpdate}
+														onDelete={this.handleDelete}
+														pagination={{
+															...this.state.pagination,
+															onChange: this.handlePageChange,
+															onShowSizeChange: this.handleShowSizeChange
+														}}
+														onSelectionChange={this.handleSelectionChange}
 				/>
 				<StudentEditDialog record={this.state.insertRecord}
-													visible={this.state.insertStatus}
-													onSure={this.handleInsert}
-													onCancel={this.handleInsertCancel}/>
+													 visible={this.state.insertStatus}
+													 onSure={this.handleInsert}
+													 onCancel={this.handleInsertCancel}/>
 				<DeleteDialog record={this.state.batchDeleteRecords}
 											visible={this.state.batchDeleteStatus}
 											onSure={this.handleBatchDelete}

@@ -5,9 +5,16 @@ import {ColumnProps} from "antd/es/table";
 import styles from './index.module.css';
 import {ManageTableProps} from "./index";
 import ManageTable from "./ManageTable";
-import TeacherEditDialog from "../EditModal/TeacherEditDialog";
-import DeleteDialog from "../DeleteModal";
+import TeacherEditDialog from "../Dialog/EditModal/TeacherEditDialog";
+import {DeleteDialog} from "../Dialog/DeleteModal";
 
+/*
+ * @class TeacherManageTable
+ * @description 教师管理表格
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:07
+ * @see CourseManageTable
+ **/
 const TeacherManageTable: React.FC<ManageTableProps<Teacher>> = (props) => {
 
 	const columns: ColumnProps<Teacher>[] = [{

@@ -2,18 +2,29 @@ import React from 'react';
 import {Empty, Table} from "antd";
 import {BaseManageTableProps} from "./index";
 
+export const paginationItemRender: (page: number, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', originalElement: React.ReactElement<HTMLElement>) => React.ReactNode =
+	(page, type, originalElement) => {
+		/*
+		 * @method paginationItemRender
+		 * @description 分页美化
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:37
+		 **/
+		if (type === 'prev') {
+			return <span>Previous</span>;
+		} else if (type === 'next') {
+			return <span>Next</span>;
+		}
+		return originalElement;
+	};
 
+/*
+ * @class ManageTable
+ * @description 管理表格
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:37
+ **/
 function ManageTable<T>(props: BaseManageTableProps<T>) {
-
-	const paginationItemRender: (page: number, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', originalElement: React.ReactElement<HTMLElement>) => React.ReactNode =
-		(page, type, originalElement) => {
-			if (type === 'prev') {
-				return <span>Previous</span>;
-			} else if (type === 'next') {
-				return <span>Next</span>;
-			}
-			return originalElement;
-		};
 
 	const rowSelection = {
 		onChange: (selectedRowKeys: string[] | number[], selectedRows: T[]) => {
@@ -39,7 +50,6 @@ function ManageTable<T>(props: BaseManageTableProps<T>) {
 									 itemRender: paginationItemRender
 								 }}/>
 			}
-
 		</div>
 	);
 }

@@ -1,10 +1,15 @@
 import React from 'react';
 import {Form, Input, Modal, Select} from 'antd';
-import {Course} from "../../services/CourseService";
+import {Course} from "../../../services/CourseService";
 import styles from './index.module.css';
 import {EditDialogProps} from "./index";
 
-
+/*
+ * @class EditDialogContent
+ * @description 课程的编辑模态框
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 22:38
+ **/
 const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 
 	const {getFieldDecorator} = props.form;
@@ -36,7 +41,7 @@ const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 							initialValue: props.record.name,
 							rules: [{
 								required: true,
-								message: <span className={styles.msError}>Please input CourseName!</span>
+								message: <span className={styles.invalid}>Please input CourseName!</span>
 							}],
 						})(
 							<Input addonBefore="CourseName"/>

@@ -4,11 +4,17 @@ import TeacherManageTable from "../../../components/Table/TeacherManageTable";
 import TeacherService, {defaultTeacher, Teacher} from "../../../services/TeacherService";
 import {PageInfo} from "../../../services/service";
 import {message} from "antd";
-import TeacherEditDialog from "../../../components/EditModal/TeacherEditDialog";
-import DeleteDialog from "../../../components/DeleteModal";
+import TeacherEditDialog from "../../../components/Dialog/EditModal/TeacherEditDialog";
+import {DeleteDialog} from "../../../components/Dialog/DeleteModal";
 import {ManageState} from "../index";
 
-
+/*
+ * @class TeacherManage
+ * @description 教师管理系统
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/11 0:01
+ * @see CourseManage
+ **/
 class TeacherManage extends React.Component<{}, ManageState<Teacher>> {
 
 	state: ManageState<Teacher> = {
@@ -63,7 +69,7 @@ class TeacherManage extends React.Component<{}, ManageState<Teacher>> {
 		})
 	};
 
-	handlePageChange = (page: number, pageSize?: number | undefined) => {
+	handlePageChange = (page: number, pageSize?: number) => {
 		this.getData(this.state.search, page, pageSize as number);
 	};
 
@@ -96,8 +102,8 @@ class TeacherManage extends React.Component<{}, ManageState<Teacher>> {
 		});
 	};
 
-	handleBatchDelete = (records: number | number[]) => {
-		TeacherService.deleteByIds(records as number[]).then(() => {
+	handleBatchDelete = (ids: number[]) => {
+		TeacherService.deleteByIds(ids).then(() => {
 			this.setState({
 				batchDeleteStatus: false
 			});

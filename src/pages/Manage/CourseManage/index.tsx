@@ -4,11 +4,16 @@ import CourseManageTable from "../../../components/Table/CourseManageTable";
 import CourseService, {Course, defaultCourse} from "../../../services/CourseService";
 import {PageInfo} from "../../../services/service";
 import {message} from "antd";
-import CourseEditDialog from "../../../components/EditModal/CourseEditDialog";
-import DeleteDialog from "../../../components/DeleteModal";
+import CourseEditDialog from "../../../components/Dialog/EditModal/CourseEditDialog";
+import {DeleteDialog} from "../../../components/Dialog/DeleteModal";
 import {ManageState} from "../index";
 
-
+/*
+ * @class CourseManage
+ * @description 课程管理界面
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:47
+ **/
 class CourseManage extends React.Component<{}, ManageState<Course>> {
 
 	state: ManageState<Course> = {
@@ -26,26 +31,58 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 	};
 
 	componentDidMount() {
+		/*
+		 * @method componentDidMount
+		 * @description 初始化
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:46
+		 **/
 		this.getData({}, this.state.pagination.current, this.state.pagination.pageSize);
 	}
 
 	handleSearchCommand = (search: Partial<Course>) => {
+		/*
+		 * @method handleSearchCommand
+		 * @param search 搜索结果
+		 * @description 点击了搜索按钮，重新获取数据
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:46
+		 **/
 		this.getData(search, this.state.pagination.current, this.state.pagination.pageSize);
 	};
 
 	handleInsertCommand = () => {
+		/*
+		 * @method handleInsertCommand
+		 * @description 点击了添加按钮，显示添加模态框
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:47
+		 **/
 		this.setState({
 			insertStatus: true
 		});
 	};
 
 	handleBatchDeleteCommand = () => {
+		/*
+		 * @method handleBatchDeleteCommand
+		 * @description 点击了批量删除按钮，显示批量删除模态框
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:48
+		 **/
 		this.setState({
 			batchDeleteStatus: true
 		})
 	};
 
 	handleUpdate = (record: Partial<Course>) => {
+		/*
+		 * @method handleUpdate
+		 * @param record 编辑结果
+		 * @description  将编辑结果返回给后台
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:48
+		 **/
 		CourseService.updateRecord(record).then(() => {
 			message.success("Update completed！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
@@ -55,6 +92,13 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 	};
 
 	handleDelete = (record: Partial<Course>) => {
+		/*
+		 * @method handleDelete
+		 * @param record 删除的记录
+		 * @description 将删除数据的id返回给后台
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:49
+		 **/
 		CourseService.deleteById(record.id as number).then(() => {
 			message.success("Successfully deleted！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
@@ -63,15 +107,38 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		})
 	};
 
-	handlePageChange = (page: number, pageSize?: number | undefined) => {
+	handlePageChange = (page: number, pageSize?: number) => {
+		/*
+		 * @method handlePageChange
+		 * @param page 当前页
+		 * @param pageSize 当前页记录数
+		 * @description 当前页发生变化，重新获取数据
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:50
+		 **/
 		this.getData(this.state.search, page, pageSize as number);
 	};
 
 	handleShowSizeChange = (current: number, size: number) => {
+		/*
+		 * @method handleShowSizeChange
+		 * @param current 当前页
+		 * @param size 每一页的记录数
+		 * @description 每一页的记录数发生变化，重新获取数据
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:51
+		 **/
 		this.getData(this.state.search, current, size);
 	};
 
 	handleInsert = (record: Partial<Course>) => {
+		/*
+		 * @method handleInsert
+		 * @param record 添加的记录
+		 * @description 将添加的记录返回给后台
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:52
+		 **/
 		this.setState({
 			insertRecord: defaultCourse,
 			insertStatus: false
@@ -84,6 +151,12 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		})
 	};
 	handleInsertCancel = () => {
+		/*
+		 * @method handleInsertCancel
+		 * @description 添加取消
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:52
+		 **/
 		this.setState({
 			insertRecord: defaultCourse,
 			insertStatus: false
@@ -91,13 +164,27 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 	};
 
 	handleSelectionChange = (selectedRowKeys: number[]) => {
+		/*
+		 * @method handleSelectionChange
+		 * @param selectedRowKeys 选择项id的数组
+		 * @description 选择项发生变换，保存数据
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:53
+		 **/
 		this.setState({
 			batchDeleteRecords: selectedRowKeys
 		});
 	};
 
-	handleBatchDelete = (records: number | number[]) => {
-		CourseService.deleteByIds(records as number[]).then(() => {
+	handleBatchDelete = (ids: number[]) => {
+		/*
+		 * @method handleBatchDelete
+		 * @param record id数组
+		 * @description 批量删除，将id数组返回给后台
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:54
+		 **/
+		CourseService.deleteByIds(ids).then(() => {
 			this.setState({
 				batchDeleteStatus: false
 			});
@@ -112,6 +199,12 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 	};
 
 	handleBatchDeleteCancel = () => {
+		/*
+		 * @method handleBatchDeleteCancel
+		 * @description 取消批量删除
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:58
+		 **/
 		this.setState({
 			batchDeleteStatus: false
 		});
@@ -145,7 +238,15 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 	}
 
 	getData = (search: Partial<Course>, pageNum: number, pageSize: number) => {
-		console.log(search);
+		/*
+		 * @method getData
+		 * @param search 搜索结果
+		 * @param pageNum 当前页
+		 * @param pageSize 当前页记录数
+		 * @description 获取数据
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/11 0:00
+		 **/
 		CourseService.selectRecords(CourseService.filter(search), pageNum, pageSize).then(res => {
 			const data: PageInfo<Course> = res.data.data as PageInfo<Course>;
 			this.setState({

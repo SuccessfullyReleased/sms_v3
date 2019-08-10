@@ -1,24 +1,9 @@
-.handleBox {
-	display: flex;
-	margin-bottom: 20px;
-
-}
-
-.handleSelect {
-	width: 120px;
-}
-
-.handleInput {
-	width: 300px;
-	display: inline-block;
-}
-.table{
-	width: 100%;
-	font-size: 14px;
-}
-.red{
+/*删除按钮正常*/
+.red {
 	color: #ff0000;
 }
-.mr10{
-	margin-right: 10px;
+
+/*删除按钮鼠标悬停*/
+.red:hover {
+	color: #c80000;
 }

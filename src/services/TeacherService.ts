@@ -1,6 +1,7 @@
 import {BaseService, HttpServiceResponse, Model, SearchResult} from "./service";
 import {Teacher} from "./TeacherService";
 import md5 from "md5";
+import axios, {Canceler} from 'axios'
 
 export interface Teacher extends Model {
 	tid: string,
@@ -61,6 +62,24 @@ class TeacherService extends BaseService<Teacher> {
 		return super.update(this.filter(record), this.isModel);
 	}
 
+	//自定义业务
+	selectByName(name: string): HttpServiceResponse<SearchResult<Teacher>> {
+		if (cancel) {
+			cancel("请求取消")
+		}
+		return axios.request({
+			method: 'post',
+			url: '/sms/teacher/list/search',
+			data: {
+				name
+			},
+			cancelToken: new axios.CancelToken((c) => {
+				cancel = c;
+			})
+		})
+	}
 }
+
+let cancel: Canceler;
 
 export default new TeacherService();

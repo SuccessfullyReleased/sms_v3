@@ -4,17 +4,33 @@ import {Button, Form, Input} from "antd";
 import {FormComponentProps} from "antd/es/form";
 import UserService from "../../services/UserService";
 
-
+/*
+ * @class SettingProps
+ * @description 个人中心界面props
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/11 0:04
+ **/
 interface SettingProps extends FormComponentProps {
 }
 
-
+/*
+ * @class Setting
+ * @description 个人中心界面
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/11 0:04
+ **/
 const Setting: React.FC<SettingProps> = (props) => {
-
 
 	const {getFieldDecorator} = props.form;
 
 	const handleSubmit: React.MouseEventHandler<HTMLElement> = (e) => {
+		/*
+		 * @method handleSubmit
+		 * @param e 点击事件事件对象
+		 * @description 提交表单
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/11 0:05
+		 **/
 		e.preventDefault();
 		props.form.validateFields((err, values) => {
 			UserService.updatePassword(values.new_password);
@@ -22,8 +38,15 @@ const Setting: React.FC<SettingProps> = (props) => {
 	};
 
 	const handleOldPassword = (rule: any, value: any, callback: any) => {
+		/*
+		 * @method handleOldPassword
+		 * @param value 值
+		 * @description 检查旧密码是否正确
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/11 0:05
+		 **/
 		try {
-			UserService.verify(value).then(res => {
+			UserService.verify(value).then(() => {
 				callback();
 			}).catch(err => {
 				callback(<span className={styles.Error}>The password is incorrect!</span>);
@@ -34,8 +57,15 @@ const Setting: React.FC<SettingProps> = (props) => {
 	};
 
 	const handleNewPassword = (rule: any, value: any, callback: any) => {
+		/*
+		 * @method handleNewPassword
+		 * @param value 值
+		 * @description 检查新密码是否与旧密码相等
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/11 0:06
+		 **/
 		try {
-			UserService.verify(value).then(res => {
+			UserService.verify(value).then(() => {
 				callback(<span className={styles.Error}>Same as old password!</span>);
 			}).catch(() => {
 				callback();
@@ -46,6 +76,13 @@ const Setting: React.FC<SettingProps> = (props) => {
 	};
 
 	const handleConfirmPassword = (rule: any, value: any, callback: any) => {
+		/*
+		 * @method handleConfirmPassword
+		 * @param value 值
+		 * @description 检查确认密码与新密码是否相等
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/11 0:07
+		 **/
 		const {getFieldValue} = props.form;
 		if (value && value !== getFieldValue('new_password')) {
 			callback(<span className={styles.Error}>The two inputs are inconsistent!</span>)
