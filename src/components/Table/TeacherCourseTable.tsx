@@ -4,7 +4,7 @@ import {Course, formatCourseStatus, formatCourseType} from "../../services/Cours
 import {ColumnProps} from "antd/es/table";
 import {ManagePaginationProps} from "./index";
 import ManageTable, {paginationItemRender} from "./ManageTable";
-import {TeacherSelectCourseDialog} from "../Dialog/TeacherCourseModal";
+import {TeacherSelectCourseDialog} from "../../pages/Manage/TeacherCourse/TeacherCourseModal";
 import styles from './index.module.css';
 
 /*

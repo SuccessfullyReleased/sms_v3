@@ -1,5 +1,11 @@
 import {SingleApi} from "../apis";
+import {Model} from "./service";
 
+export interface SCRelation extends Model {
+	sid: number,
+	cid: number,
+	tid: number
+}
 
 class StudentCourseService extends SingleApi {
 
@@ -9,45 +15,62 @@ class StudentCourseService extends SingleApi {
 		})
 	}
 
-	choose(cid: number, tid: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	choose(record: SCRelation) {
 		return this.request({
-			method: 'get',
-			params: {
-				sid, cid, tid
-			}
+			method: 'post',
+			data: record
 		})
 	}
 
-	drop(cid: number, tid: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	batchChoose(records: Array<SCRelation>) {
+		return this.request({
+			method: 'post',
+			url: '/list',
+			data: records
+		})
+	}
+
+	drop(record: SCRelation) {
 		return this.request({
 			method: 'delete',
-			params: {
-				sid, cid, tid
-			}
+			data: record
 		})
 	}
 
-	selected(pageNum?: number, pageSize?: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	batchDrop(records: Array<SCRelation>) {
 		return this.request({
-			method: 'get',
-			url: `/list/selected/${sid}`,
-			headers: {
-				pageNum, pageSize
-			}
+			method: 'delete',
+			url: '/list',
+			data: records
 		})
 	}
 
-	unSelected(courseName: string, pageNum?: number, pageSize?: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	selected(sid: number, pageNum?: number, pageSize?: number) {
+		if (pageNum && pageSize) {
+			return this.request({
+				method: 'get',
+				url: `/list/selected/${sid}`,
+				headers: {
+					pageNum, pageSize
+				}
+			})
+		} else {
+			return this.request({
+				method: 'get',
+				url: `/list/selected/${sid}`,
+				headers: {
+					noPage: true
+				}
+			})
+		}
+	}
+
+	unSelected(sid: number, courseName: string, pageNum?: number, pageSize?: number) {
 		return this.request({
 			method: 'get',
 			url: '/list/unSelected',
 			params: {
-				sid: sid,
-				courseName: courseName
+				sid, courseName
 			},
 			headers: {
 				pageNum, pageSize

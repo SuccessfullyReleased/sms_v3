@@ -9,7 +9,7 @@ import {message} from "antd";
 import {
 	TeacherBatchSelectCourseDialog,
 	TeacherSelectedCourseDialog
-} from "../../../components/Dialog/TeacherCourseModal";
+} from "./TeacherCourseModal";
 import {TeacherUnSelectedCourseTable} from "../../../components/Table/TeacherCourseTable";
 
 /*
@@ -173,7 +173,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @date 2019/8/10 19:09
 		 **/
 		console.log(record);
-		TeacherCourseService.choose(this.state.id, record.id as number).then(() => {
+		TeacherCourseService.choose({tid: this.state.id, cid: record.id as number}).then(() => {
 			message.success("Successfully chose！");
 			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 		}).catch(() => {
@@ -190,7 +190,10 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:11
 		 **/
-		TeacherCourseService.batchChoose(this.state.id, records.map(course => course.id) as number[]).then(() => {
+		TeacherCourseService.batchChoose(records.map(course => ({
+			tid: this.state.id,
+			cid: course.id as number
+		}))).then(() => {
 			this.setState({
 				selectedRows: [],
 				batchSelectStatus: false
@@ -267,7 +270,10 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		this.setState({
 			selectedDialogStatus: false
 		});
-		TeacherCourseService.batchDrop(this.state.id, records.map(records => records.id) as number[]).then(() => {
+		TeacherCourseService.batchDrop(records.map(course => ({
+			tid: this.state.id,
+			cid: course.id as number
+		}))).then(() => {
 			message.success("Successfully drop！");
 			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 		}).catch(() => {

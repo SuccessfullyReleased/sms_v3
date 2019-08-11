@@ -1,5 +1,10 @@
 import {SingleApi} from "../apis";
+import {Model} from "./service";
 
+export interface TCRelation extends Model {
+	tid: number,
+	cid: number
+}
 
 class TeacherCourseService extends SingleApi {
 
@@ -9,43 +14,33 @@ class TeacherCourseService extends SingleApi {
 		})
 	}
 
-	choose(tid: number, cid: number) {
+	choose(record: TCRelation) {
 		return this.request({
-			method: 'get',
-			params: {
-				tid, cid
-			}
+			method: 'post',
+			data: record
 		})
 	}
 
-	batchChoose(tid: number, cids: number[]) {
+	batchChoose(records: Array<TCRelation>) {
 		return this.request({
 			method: 'post',
 			url: '/list',
-			params: {
-				tid
-			},
-			data: cids
+			data: records
 		})
 	}
 
-	drop(tid: number, cid: number) {
+	drop(record: TCRelation) {
 		return this.request({
 			method: 'delete',
-			params: {
-				tid, cid
-			}
+			data: record
 		})
 	}
 
-	batchDrop(tid: number, cids: number[]) {
+	batchDrop(records: Array<TCRelation>) {
 		return this.request({
-			method: 'put',
+			method: 'delete',
 			url: '/list',
-			params: {
-				tid
-			},
-			data: cids
+			data: records
 		})
 	}
 

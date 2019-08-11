@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Course} from "../../services/CourseService";
+import {Course} from "../../../services/CourseService";
 import {Modal} from "antd";
-import {TeacherSelectedCourseTable} from "../Table/TeacherCourseTable";
-import {Dialog} from "./index";
+import {TeacherSelectedCourseTable} from "../../../components/Table/TeacherCourseTable";
+import {Dialog} from "../../../components/Dialog";
 
 /*
  * @class TeacherSelectCourseDialogProps
