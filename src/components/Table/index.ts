@@ -24,6 +24,7 @@ export interface BaseManageTableProps<T> {
 	columns: ColumnProps<T>[];
 	tableData: Array<T>,
 	pagination: ManagePaginationProps,
+	rowKey?: (record: T, index: number) => string
 	showRowSelection?: boolean,
 	onSelectionChange: (selectedRowKeys: number[], selectedRows: T[]) => void
 }

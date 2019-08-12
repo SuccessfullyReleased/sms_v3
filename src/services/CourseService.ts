@@ -61,20 +61,20 @@ class CourseService extends BaseService<Course> {
 	}
 
 	filter(record: Partial<Course>): Partial<Course> {
-		console.log(record);
-		if (!record.id) {
-			record.id = undefined;
+		let _record: Partial<Course> = {};
+		if (record.id) {
+			_record.id = record.id;
 		}
-		if (!record.name) {
-			record.name = undefined;
+		if (record.name) {
+			_record.name = record.name;
 		}
-		if (!record.type) {
-			record.type = undefined;
+		if (record.type) {
+			_record.type = record.type;
 		}
-		if (!record.status) {
-			record.status = undefined;
+		if (record.status) {
+			_record.status = record.status;
 		}
-		return record;
+		return _record;
 	}
 
 	selectOneRecord(record: Partial<Course>): HttpServiceResponse<SearchResult<Course>> {

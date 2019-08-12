@@ -1,5 +1,23 @@
 import {SingleApi} from "../apis";
+import {Model} from "./service";
 
+export interface ZCRelation extends Model {
+	zid: number,
+	cid: number,
+	tid: number
+}
+
+export interface ClazzCourseModel {
+	cid: number,
+	course: string,
+	tid: number,
+	teacher: string
+}
+
+export const defaultClazzCourse = {
+	course: '',
+	teacher: ''
+};
 
 class ClazzCourseService extends SingleApi {
 
@@ -9,45 +27,62 @@ class ClazzCourseService extends SingleApi {
 		})
 	}
 
-	choose(cid: number, tid: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	choose(record: ZCRelation) {
 		return this.request({
-			method: 'get',
-			params: {
-				sid, cid, tid
-			}
+			method: 'post',
+			data: record
 		})
 	}
 
-	drop(cid: number, tid: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	batchChoose(records: Array<ZCRelation>) {
+		return this.request({
+			method: 'post',
+			url: '/list',
+			data: records
+		})
+	}
+
+	drop(record: ZCRelation) {
 		return this.request({
 			method: 'delete',
-			params: {
-				sid, cid, tid
-			}
+			data: record
 		})
 	}
 
-	selected(pageNum?: number, pageSize?: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	batchDrop(records: Array<ZCRelation>) {
 		return this.request({
-			method: 'get',
-			url: `/list/selected/${sid}`,
-			headers: {
-				pageNum, pageSize
-			}
+			method: 'delete',
+			url: '/list',
+			data: records
 		})
 	}
 
-	unSelected(courseName: string, pageNum?: number, pageSize?: number) {
-		const sid: number = Number(localStorage.getItem('sms_id'));
+	selected(zid: number, pageNum?: number, pageSize?: number) {
+		if (pageNum && pageSize) {
+			return this.request({
+				method: 'get',
+				url: `/list/selected/${zid}`,
+				headers: {
+					pageNum, pageSize
+				}
+			})
+		} else {
+			return this.request({
+				method: 'get',
+				url: `/list/selected/${zid}`,
+				headers: {
+					noPage: true
+				}
+			})
+		}
+	}
+
+	unSelected(zid: number, courseName: string, teacherName: string, pageNum?: number, pageSize?: number) {
 		return this.request({
 			method: 'get',
 			url: '/list/unSelected',
 			params: {
-				sid: sid,
-				courseName: courseName
+				zid, courseName, teacherName
 			},
 			headers: {
 				pageNum, pageSize

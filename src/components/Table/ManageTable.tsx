@@ -39,7 +39,7 @@ function ManageTable<T>(props: BaseManageTableProps<T>) {
 				props.tableData.length === 0 ? <Empty/> :
 					<Table dataSource={props.tableData}
 								 columns={props.columns}
-								 rowKey={'id'}
+								 rowKey={props.rowKey ? props.rowKey : 'id'}
 								 rowSelection={props.showRowSelection === false ? undefined : rowSelection}
 								 pagination={{
 									 ...props.pagination,

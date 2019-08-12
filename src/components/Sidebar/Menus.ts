@@ -40,25 +40,30 @@ const Menus: Array<Menu> = [{
 	index: '/main/setting',
 	title: 'Setting'
 }, {
-	icon: 'icon-course',
-	index: '/main/course-manage',
-	title: 'CourseManage'
-}, {
 	icon: 'icon-student',
 	index: '/main/student-manage',
-	title: 'StudentManage'
+	title: 'StudentList'
 }, {
 	icon: 'icon-teacher',
 	index: '/main/teacher-manage',
-	title: 'TeacherManage'
+	title: 'TeacherList'
 }, {
 	icon: 'icon-course',
-	index: '/main/student-course',
-	title: 'StudentCourse'
-}, {
-	icon: 'icon-course',
-	index: '/main/teacher-course',
-	title: 'TeacherCourse'
+	index: 'CourseManage',
+	title: 'CourseManage',
+	subs: [{
+		index: '/main/course-manage',
+		title: 'CourseList'
+	}, {
+		index: '/main/clazz-course',
+		title: 'ClazzCourse'
+	}, {
+		index: '/main/student-course',
+		title: 'StudentCourse'
+	}, {
+		index: '/main/teacher-course',
+		title: 'TeacherCourse'
+	}]
 }];
 
 export default Menus

@@ -46,6 +46,10 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 	};
 
 	handleBatchDeleteCommand = () => {
+		if (this.state.batchDeleteRecords.length===0){
+			message.warn('No selected students!');
+			return;
+		}
 		this.setState({
 			batchDeleteStatus: true
 		})

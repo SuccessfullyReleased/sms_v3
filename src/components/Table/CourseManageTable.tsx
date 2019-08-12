@@ -79,7 +79,7 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 	 **/
 	const [deleteStatus, setDeleteStatus] = useState(false);
 
-	const handleEdit = (record: any, index: number) => {
+	const handleEdit = (record: Course, index: number) => {
 		/*
 		 * @method handleEdit
 		 * @param record 编辑记录
@@ -91,7 +91,7 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 		setEditStatus(true);
 	};
 
-	const handleDelete = (record: any, index: number) => {
+	const handleDelete = (record: Course, index: number) => {
 		/*
 		 * @method handleDelete
 		 * @param record 删除记录
@@ -153,18 +153,22 @@ const CourseManageTable: React.FC<ManageTableProps<Course>> = (props) => {
 
 	return (
 		<div className="container">
-			<ManageTable columns={columns}
-									 tableData={props.tableData}
-									 pagination={props.pagination}
-									 onSelectionChange={props.onSelectionChange}/>
-			<CourseEditDialog record={editRecord}
-												visible={editStatus}
-												onSure={handleRecordUpdate}
-												onCancel={handleRecordUpdateCancel}/>
-			<DeleteDialog record={deleteRecord}
-										visible={deleteStatus}
-										onSure={handleRecordDelete}
-										onCancel={handleRecordDeleteCancel}/>
+			<ManageTable
+				columns={columns}
+				tableData={props.tableData}
+				pagination={props.pagination}
+				onSelectionChange={props.onSelectionChange}/>
+			<CourseEditDialog
+				key={editRecord.id}
+				record={editRecord}
+				visible={editStatus}
+				onSure={handleRecordUpdate}
+				onCancel={handleRecordUpdateCancel}/>
+			<DeleteDialog
+				record={deleteRecord}
+				visible={deleteStatus}
+				onSure={handleRecordDelete}
+				onCancel={handleRecordDeleteCancel}/>
 		</div>
 	);
 };

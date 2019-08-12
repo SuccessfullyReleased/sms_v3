@@ -14,6 +14,8 @@ const EditDialogContent: React.FC<EditDialogProps<Course>> = (props) => {
 
 	const {getFieldDecorator} = props.form;
 
+	console.log(props.record);
+
 	return (
 		<Modal
 			title="Edit"

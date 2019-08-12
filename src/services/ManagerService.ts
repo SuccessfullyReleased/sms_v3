@@ -16,17 +16,17 @@ class ManagerService extends BaseService<Manager> {
 	}
 
 	filter(record: Partial<Manager>): Partial<Manager> {
-		console.log(record);
-		if (!record.id) {
-			record.id = undefined;
+		let _record: Partial<Manager> = {};
+		if (record.id) {
+			_record.id = record.id;
 		}
-		if (!record.name) {
-			record.name = undefined;
+		if (record.name) {
+			_record.name = record.name;
 		}
-		if (!record.password) {
-			record.password = undefined;
+		if (record.password) {
+			_record.password = record.password;
 		}
-		return record;
+		return _record;
 	}
 
 	selectOneRecord(record: Partial<Manager>): HttpServiceResponse<SearchResult<Manager>> {

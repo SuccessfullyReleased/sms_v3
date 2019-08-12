@@ -70,6 +70,10 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 23:48
 		 **/
+		if (this.state.batchDeleteRecords.length===0){
+			message.warn('No selected courses!');
+			return;
+		}
 		this.setState({
 			batchDeleteStatus: true
 		})

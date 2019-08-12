@@ -26,20 +26,20 @@ class TeacherService extends BaseService<Teacher> {
 	}
 
 	filter(record: Partial<Teacher>): Partial<Teacher> {
-		console.log(record);
-		if (!record.id) {
-			record.id = undefined;
+		let _record: Partial<Teacher> = {};
+		if (record.id) {
+			_record.id = record.id;
 		}
-		if (!record.tid) {
-			record.tid = undefined;
+		if (record.tid) {
+			_record.tid = record.tid;
 		}
-		if (!record.name) {
-			record.name = undefined;
+		if (record.name) {
+			_record.name = record.name;
 		}
-		if (!record.password) {
-			record.password = undefined;
+		if (record.password) {
+			_record.password = record.password;
 		}
-		return record;
+		return _record;
 	}
 
 	selectOneRecord(record: Partial<Teacher>): HttpServiceResponse<SearchResult<Teacher>> {
