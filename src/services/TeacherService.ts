@@ -76,7 +76,7 @@ class TeacherService extends BaseService<Teacher> {
 			cancelToken: new axios.CancelToken((c) => {
 				cancel = c;
 			})
-		})
+		});
 	}
 }
 

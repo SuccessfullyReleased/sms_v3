@@ -61,7 +61,7 @@ class UserService extends SingleApi {
 	updatePassword(password: string): void {
 		const id = localStorage.getItem('sms_id');
 		const role = localStorage.getItem('sms_role');
-		const account = localStorage.getItem('sms_account');
+		// const account = localStorage.getItem('sms_account');
 		// password = md5(`${account}${password}`);
 		switch (role) {
 			case STUDENT:

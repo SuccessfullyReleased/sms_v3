@@ -53,6 +53,10 @@ const Menus: Array<Menu> = [{
 	title: 'TeacherManage'
 }, {
 	icon: 'icon-course',
+	index: '/main/student-course',
+	title: 'StudentCourse'
+}, {
+	icon: 'icon-course',
 	index: '/main/teacher-course',
 	title: 'TeacherCourse'
 }];

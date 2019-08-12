@@ -2,21 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {AutoComplete, Button, Col, Form, Icon, Input, Row} from "antd";
 import styles from './index.module.css';
 import {FormComponentProps} from "antd/es/form";
-import TeacherService, {Teacher} from "../../services/TeacherService";
-import {Course} from "../../services/CourseService";
+import StudentService, {Student} from "../../services/StudentService";
 import {SelectValue} from "antd/lib/select";
 import {DataSourceItemType} from "antd/es/auto-complete";
+import {StudentCourseModel} from "../../services/StudentCourseService";
 import {debounce} from 'lodash'
 
+
 /*
- * @class TeacherCourseSearchProps
- * @description 教师课程管理界面的搜索组件的props
+ * @class StudentCourseSearchProps
+ * @description 学生课程管理界面的搜索组件的props
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 20:11
  **/
-interface TeacherCourseSearchProps extends FormComponentProps {
+interface StudentCourseSearchProps extends FormComponentProps {
 	/*
-	 * @var 教师id
+	 * @var 学生id
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 20:12
 	 **/
@@ -32,7 +33,7 @@ interface TeacherCourseSearchProps extends FormComponentProps {
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 20:13
 	 **/
-	onSearch: (id: number, search: Partial<Course>) => void
+	onSearch: (id: number, search: Partial<StudentCourseModel>) => void
 	/*
 	 * @var 点击批量选择按钮后触发的回调
 	 * @author 戴俊明 <idaijunming@163.com>
@@ -48,12 +49,12 @@ interface TeacherCourseSearchProps extends FormComponentProps {
 }
 
 /*
- * @class TeacherCourseSearchContent
- * @description 教师课程管理界面的搜索组件,该组件需要Form包裹
+ * @class StudentCourseSearchContent
+ * @description 学生课程管理界面的搜索组件,该组件需要Form包裹
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 20:27
  **/
-const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) => {
+const StudentCourseSearchContent: React.FC<StudentCourseSearchProps> = (props) => {
 
 	/*
 	 * @var 将props给的id缓存下来，与AutoComplete组件的string类型同步的需要
@@ -62,7 +63,7 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 	 **/
 	const [id, setId] = useState(props.id as number);
 	/*
-	 * @var 教师有关信息的数组，给AutoComplete组件作为数据源
+	 * @var 学生有关信息的数组，给AutoComplete组件作为数据源
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 20:18
 	 **/
@@ -74,18 +75,19 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 20:19
 		 **/
-		TeacherService.selectByName('').then(res => {
-			const data = (res.data.data as Teacher[]).map(teacher => ({
-				text: `${teacher.tid} - ${teacher.name}`,
-				value: String(teacher.id)
+
+		StudentService.selectByName('').then(res => {
+			const data = (res.data.data as Student[]).map(student => ({
+				text: `${student.sid} - ${student.name}`,
+				value: String(student.id)
 			}));
 			setDataSource(data);
 		});
 	}, []);
 
-	const handleTeacherSearch: React.MouseEventHandler = (e) => {
+	const handleStudentSearch: React.MouseEventHandler = (e) => {
 		/*
-		 * @method handleTeacherSearch
+		 * @method handleStudentSearch
 		 * @param e 点击事件的Event对象
 		 * @description 点击搜索按钮后触发，触发回调返回搜索结果
 		 * @author 戴俊明 <idaijunming@163.com>
@@ -94,7 +96,8 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 		e.preventDefault();
 		const {getFieldValue} = props.form;
 		props.onSearch(id, {
-			name: getFieldValue('CourseName')
+			course: getFieldValue('CourseName'),
+			teacher: getFieldValue('TeacherName')
 		});
 	};
 
@@ -112,10 +115,10 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 				props.onIdChange(0);
 			}
 		}
-		TeacherService.selectByName(value).then(res => {
-			const data = (res.data.data as Teacher[]).map(teacher => ({
-				text: `${teacher.tid} - ${teacher.name}`,
-				value: String(teacher.id)
+		StudentService.selectByName(value).then(res => {
+			const data = (res.data.data as Student[]).map(student => ({
+				text: `${student.sid} - ${student.name}`,
+				value: String(student.id)
 			}));
 			setDataSource(data);
 		});
@@ -142,7 +145,7 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 					<Col span={4}>
 						<Form.Item>
 							{
-								getFieldDecorator('TeacherName', {
+								getFieldDecorator('StudentName', {
 									initialValue: String(id === 0 ? '' : id)
 								})(
 									<AutoComplete
@@ -153,7 +156,7 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 										onSearch={handleSearch}
 										allowClear
 										backfill={true}
-										placeholder="TeacherName"
+										placeholder="StudentName"
 									/>
 								)
 							}
@@ -168,13 +171,19 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 							}
 						</Form.Item>
 					</Col>
+					<Col span={6}>
+						<Form.Item>
+							{
+								getFieldDecorator('TeacherName')(
+									<Input addonBefore="TeacherName"/>
+								)
+							}
+						</Form.Item>
+					</Col>
 					<Col span={8}>
 						<div>
-							<Button className={styles.Btn} type="primary" onClick={handleTeacherSearch}>Search<Icon
+							<Button className={styles.Btn} type="primary" onClick={handleStudentSearch}>Search<Icon
 								type="search"/></Button>
-							<Button className={styles.Btn} icon="plus" onClick={() => {
-								props.onBatchSelect()
-							}}>Batch Select</Button>
 							{
 								id === 0 ? null : <Button className={styles.Btn} icon="table" onClick={() => {
 									props.onShowSelected()
@@ -188,6 +197,6 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 	);
 };
 
-const TeacherCourseSearch = Form.create<TeacherCourseSearchProps>({})(TeacherCourseSearchContent);
+const StudentCourseSearch = Form.create<StudentCourseSearchProps>({})(StudentCourseSearchContent);
 
-export default TeacherCourseSearch;
+export default StudentCourseSearch;

@@ -7,6 +7,18 @@ export interface SCRelation extends Model {
 	tid: number
 }
 
+export interface StudentCourseModel {
+	cid: number,
+	course: string,
+	tid: number,
+	teacher: string
+}
+
+export const defaultStudentCourse = {
+	course: '',
+	teacher: ''
+};
+
 class StudentCourseService extends SingleApi {
 
 	constructor() {
@@ -65,12 +77,12 @@ class StudentCourseService extends SingleApi {
 		}
 	}
 
-	unSelected(sid: number, courseName: string, pageNum?: number, pageSize?: number) {
+	unSelected(sid: number, courseName: string, teacherName: string, pageNum?: number, pageSize?: number) {
 		return this.request({
 			method: 'get',
 			url: '/list/unSelected',
 			params: {
-				sid, courseName
+				sid, courseName, teacherName
 			},
 			headers: {
 				pageNum, pageSize

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Empty, Table} from "antd";
 import {BaseManageTableProps} from "./index";
+import {TableRowSelection} from "antd/lib/table";
 
 export const paginationItemRender: (page: number, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', originalElement: React.ReactElement<HTMLElement>) => React.ReactNode =
 	(page, type, originalElement) => {
@@ -26,7 +27,7 @@ export const paginationItemRender: (page: number, type: 'page' | 'prev' | 'next'
  **/
 function ManageTable<T>(props: BaseManageTableProps<T>) {
 
-	const rowSelection = {
+	const rowSelection: TableRowSelection<T> = {
 		onChange: (selectedRowKeys: string[] | number[], selectedRows: T[]) => {
 			props.onSelectionChange(selectedRowKeys as number[], selectedRows);
 		}
@@ -39,7 +40,7 @@ function ManageTable<T>(props: BaseManageTableProps<T>) {
 					<Table dataSource={props.tableData}
 								 columns={props.columns}
 								 rowKey={'id'}
-								 rowSelection={rowSelection}
+								 rowSelection={props.showRowSelection === false ? undefined : rowSelection}
 								 pagination={{
 									 ...props.pagination,
 									 defaultCurrent: 1,

@@ -13,6 +13,7 @@ export interface ManagePaginationProps {
 	onChange: (page: number, pageSize?: number | undefined) => void,
 	onShowSizeChange: (current: number, size: number) => void
 }
+
 /*
  * @class BaseManageTableProps
  * @description 基础表格props
@@ -23,8 +24,10 @@ export interface BaseManageTableProps<T> {
 	columns: ColumnProps<T>[];
 	tableData: Array<T>,
 	pagination: ManagePaginationProps,
+	showRowSelection?: boolean,
 	onSelectionChange: (selectedRowKeys: number[], selectedRows: T[]) => void
 }
+
 /*
  * @class ManageTableProps
  * @description 管理表格的props
