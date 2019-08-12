@@ -127,7 +127,7 @@ class ClazzCourse extends React.Component<{}, ClazzCourseState> {
 		 * @date 2019/8/10 19:07
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.warn('No selected class!');
 			return;
 		}
 		if (this.state.selectedRows.length === 0) {
@@ -147,7 +147,7 @@ class ClazzCourse extends React.Component<{}, ClazzCourseState> {
 		 * @date 2019/8/10 19:08
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.warn('No selected class!');
 			return;
 		}
 		if (this.state.selectedData.length === 0) {
@@ -167,7 +167,6 @@ class ClazzCourse extends React.Component<{}, ClazzCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:09
 		 **/
-		console.log(record);
 		ClazzCourseService.choose({zid: this.state.id, cid: record.cid as number, tid: record.tid}).then(() => {
 			message.success("Successfully chose！");
 			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);

@@ -3,10 +3,48 @@ import CourseManageSearch from "../../../components/Search/CourseManageSearch";
 import CourseManageTable from "../../../components/Table/CourseManageTable";
 import CourseService, {Course, defaultCourse} from "../../../services/CourseService";
 import {PageInfo} from "../../../services/service";
-import {message} from "antd";
+import {message, Modal} from "antd";
 import CourseEditDialog from "../../../components/Dialog/EditModal/CourseEditDialog";
-import {DeleteDialog} from "../../../components/Dialog/DeleteModal";
-import {ManageState} from "../index";
+import {ManagePaginationProps} from "../../../components/Table";
+
+export interface CourseManageState {
+	/*
+	 * @var 表格数据源
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:43
+	 **/
+	tableData: Array<Course>,
+	/*
+	 * @var 分页参数，onChange,onShowSizeChange由组件自定义实现
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:43
+	 **/
+	pagination: Omit<Omit<ManagePaginationProps, 'onChange'>, 'onShowSizeChange'>,
+	/*
+	 * @var 搜索结果
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:44
+	 **/
+	search: Partial<Course>,
+	/*
+	 * @var 添加的记录
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:44
+	 **/
+	insertRecord: Partial<Course>,
+	/*
+	 * @var 添加模态框状态
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:45
+	 **/
+	insertStatus: boolean,
+	/*
+	 * @var 批量删除记录的id
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/10 23:45
+	 **/
+	selectedRows: Array<Course>
+}
 
 /*
  * @class CourseManage
@@ -14,9 +52,9 @@ import {ManageState} from "../index";
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 23:47
  **/
-class CourseManage extends React.Component<{}, ManageState<Course>> {
+class CourseManage extends React.Component<{}, CourseManageState> {
 
-	state: ManageState<Course> = {
+	state: CourseManageState = {
 		tableData: [],
 		pagination: {
 			current: 1,
@@ -26,8 +64,8 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		search: defaultCourse,
 		insertRecord: defaultCourse,
 		insertStatus: false,
-		batchDeleteRecords: [],
-		batchDeleteStatus: false
+
+		selectedRows: []
 	};
 
 	componentDidMount() {
@@ -70,12 +108,136 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 23:48
 		 **/
-		if (this.state.batchDeleteRecords.length===0){
+		if (this.state.selectedRows.length === 0) {
 			message.warn('No selected courses!');
 			return;
 		}
-		this.setState({
-			batchDeleteStatus: true
+		Modal.confirm({
+			type: 'danger',
+			title: 'Delete',
+			content: 'Delete is not recoverable, are you sure？',
+			okType: 'danger',
+			onOk: this.handleBatchDelete
+		});
+	};
+
+	handleStartChooseCommand = () => {
+		if (this.state.selectedRows.length === 0) {
+			message.warn('No selected courses!');
+			return;
+		}
+		Modal.confirm({
+			type: 'warn',
+			title: 'Alter',
+			content: 'Will change the stage of these courses, are you sure？',
+			okType: 'primary',
+			onOk: this.handleStartChoose
+		});
+	};
+
+	handleEndChooseCommand = () => {
+		if (this.state.selectedRows.length === 0) {
+			message.warn('No selected courses!');
+			return;
+		}
+		Modal.confirm({
+			type: 'warn',
+			title: 'Alter',
+			content: 'Will change the stage of these courses, are you sure？',
+			okType: 'primary',
+			onOk: this.handleEndChoose
+		});
+	};
+
+	handleStartSettlementCommand = () => {
+		if (this.state.selectedRows.length === 0) {
+			message.warn('No selected courses!');
+			return;
+		}
+		Modal.confirm({
+			type: 'warn',
+			title: 'Alter',
+			content: 'Will change the stage of these courses, are you sure？',
+			okType: 'primary',
+			onOk: this.handleStartSettlement
+		});
+	};
+
+	handleEndSettlementCommand = () => {
+		if (this.state.selectedRows.length === 0) {
+			message.warn('No selected courses!');
+			return;
+		}
+		Modal.confirm({
+			type: 'warn',
+			title: 'Alter',
+			content: 'Will change the stage of these courses, are you sure？',
+			okType: 'primary',
+			onOk: this.handleEndSettlement
+		});
+	};
+
+	handleBatchDelete = () => {
+		/*
+		 * @method handleBatchDelete
+		 * @param record id数组
+		 * @description 批量删除，将id数组返回给后台
+		 * @author 戴俊明 <idaijunming@163.com>
+		 * @date 2019/8/10 23:54
+		 **/
+		CourseService.deleteByIds(this.state.selectedRows.map(course => course.id) as number[]).then(() => {
+			message.success("Successfully deleted！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			message.error("Failed to delete！")
+		})
+	};
+
+	handleStartChoose = () => {
+		CourseService.updateRecords(this.state.selectedRows.filter(course => course.status !== 2).map(course => {
+			course.status = 2;
+			return course;
+		})).then(() => {
+			message.success("Update completed！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			message.error("Update failed！")
+		})
+	};
+
+	handleEndChoose = () => {
+		CourseService.updateRecords(this.state.selectedRows.filter(course => course.status !== 3).map(course => {
+			course.status = 3;
+			return course;
+		})).then(() => {
+			message.success("Update completed！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			message.error("Update failed！")
+		})
+	};
+
+	handleStartSettlement = () => {
+		CourseService.updateRecords(this.state.selectedRows.filter(course => course.status !== 4).map(course => {
+			course.status = 4;
+			return course;
+		})).then(() => {
+			message.success("Update completed！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			message.error("Update failed！")
+		})
+	};
+
+	handleEndSettlement = () => {
+		CourseService.updateRecords(this.state.selectedRows.filter(course => course.status !== 1).map(course => {
+			course.status = 1;
+			return course;
+		})).then(() => {
+			message.success("Update completed！");
+			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
+		}).catch(() => {
+			message.error("Update failed！")
 		})
 	};
 
@@ -167,7 +329,7 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		});
 	};
 
-	handleSelectionChange = (selectedRowKeys: number[]) => {
+	handleSelectionChange = (selectedRowKeys: number[], selectedRows: Course[]) => {
 		/*
 		 * @method handleSelectionChange
 		 * @param selectedRowKeys 选择项id的数组
@@ -176,67 +338,38 @@ class CourseManage extends React.Component<{}, ManageState<Course>> {
 		 * @date 2019/8/10 23:53
 		 **/
 		this.setState({
-			batchDeleteRecords: selectedRowKeys
-		});
-	};
-
-	handleBatchDelete = (ids: number[]) => {
-		/*
-		 * @method handleBatchDelete
-		 * @param record id数组
-		 * @description 批量删除，将id数组返回给后台
-		 * @author 戴俊明 <idaijunming@163.com>
-		 * @date 2019/8/10 23:54
-		 **/
-		CourseService.deleteByIds(ids).then(() => {
-			this.setState({
-				batchDeleteStatus: false
-			});
-			message.success("Successfully deleted！");
-			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
-		}).catch(() => {
-			this.setState({
-				batchDeleteStatus: false
-			});
-			message.error("Failed to delete！")
-		})
-	};
-
-	handleBatchDeleteCancel = () => {
-		/*
-		 * @method handleBatchDeleteCancel
-		 * @description 取消批量删除
-		 * @author 戴俊明 <idaijunming@163.com>
-		 * @date 2019/8/10 23:58
-		 **/
-		this.setState({
-			batchDeleteStatus: false
+			selectedRows: selectedRows
 		});
 	};
 
 	render() {
 		return (
 			<div>
-				<CourseManageSearch onSearch={this.handleSearchCommand} onInsert={this.handleInsertCommand}
-														onBatchDelete={this.handleBatchDeleteCommand}/>
-				<CourseManageTable tableData={this.state.tableData}
-													 onUpdate={this.handleUpdate}
-													 onDelete={this.handleDelete}
-													 pagination={{
-														 ...this.state.pagination,
-														 onChange: this.handlePageChange,
-														 onShowSizeChange: this.handleShowSizeChange
-													 }}
-													 onSelectionChange={this.handleSelectionChange}
+				<CourseManageSearch
+					onSearch={this.handleSearchCommand}
+					onInsert={this.handleInsertCommand}
+					onBatchDelete={this.handleBatchDeleteCommand}
+					onStartChoose={this.handleStartChooseCommand}
+					onEndChoose={this.handleEndChooseCommand}
+					onStartSettlement={this.handleStartSettlementCommand}
+					onEndSettlement={this.handleEndSettlementCommand}
 				/>
-				<CourseEditDialog record={this.state.insertRecord}
-													visible={this.state.insertStatus}
-													onSure={this.handleInsert}
-													onCancel={this.handleInsertCancel}/>
-				<DeleteDialog record={this.state.batchDeleteRecords}
-											visible={this.state.batchDeleteStatus}
-											onSure={this.handleBatchDelete}
-											onCancel={this.handleBatchDeleteCancel}/>
+				<CourseManageTable
+					tableData={this.state.tableData}
+					onUpdate={this.handleUpdate}
+					onDelete={this.handleDelete}
+					pagination={{
+						...this.state.pagination,
+						onChange: this.handlePageChange,
+						onShowSizeChange: this.handleShowSizeChange
+					}}
+					onSelectionChange={this.handleSelectionChange}
+				/>
+				<CourseEditDialog
+					record={this.state.insertRecord}
+					visible={this.state.insertStatus}
+					onSure={this.handleInsert}
+					onCancel={this.handleInsertCancel}/>
 			</div>
 		);
 	}

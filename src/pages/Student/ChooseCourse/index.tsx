@@ -1,24 +1,22 @@
 import React from 'react';
-import {Teacher} from "../../../services/TeacherService";
-import TeacherCourseSearch from "../../../components/Search/TeacherCourseSearch";
-import {Course, defaultCourse} from "../../../services/CourseService";
 import {ManagePaginationProps} from "../../../components/Table";
-import TeacherCourseService from "../../../services/TeacherCourseService";
+import StudentCourseService, {defaultStudentCourse, StudentCourseModel} from "../../../services/StudentCourseService";
 import {PageInfo} from "../../../services/service";
 import {message} from "antd";
+import {StudentUnSelectedCourseTable} from "../../../components/Table/StudentCourseTable";
 import {
-	TeacherBatchSelectCourseDialog,
-	TeacherSelectedCourseDialog
-} from "./TeacherCourseModal";
-import {TeacherUnSelectedCourseTable} from "../../../components/Table/TeacherCourseTable";
+	StudentBatchSelectCourseDialog,
+	StudentSelectedCourseDialog
+} from "../../Manage/StudentCourse/StudentCourseModal";
+import ChooseCourseSearch from "../../../components/Search/ChooseCourseSearch";
 
 /*
- * @class TeacherCourseState
+ * @class StudentCourseState
  * @description 教师管理课程的state
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 18:55
  **/
-export interface TeacherCourseState {
+export interface StudentCourseState {
 	/*
 	 * @var 教师id
 	 * @author 戴俊明 <idaijunming@163.com>
@@ -30,7 +28,7 @@ export interface TeacherCourseState {
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 19:00
 	 **/
-	search: Partial<Course>,
+	search: Partial<StudentCourseModel>,
 	/*
 	 * @var 批量选择的模态框提示是否显示
 	 * @author 戴俊明 <idaijunming@163.com>
@@ -48,25 +46,25 @@ export interface TeacherCourseState {
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 19:02
 	 **/
-	selectedData: Array<Course>,
+	selectedData: Array<StudentCourseModel>,
 	/*
 	 * @var 将要从已选择课程中删除的课程
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 19:03
 	 **/
-	unSelectedRows: Array<Course>
+	unSelectedRows: Array<StudentCourseModel>
 	/*
 	 * @var 未选择的课程
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 19:03
 	 **/
-	unSelectedData: Array<Course>,
+	unSelectedData: Array<StudentCourseModel>,
 	/*
 	 * @var 将要选择的课程
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 19:04
 	 **/
-	selectedRows: Array<Course>,
+	selectedRows: Array<StudentCourseModel>,
 	/*
 	 * @var 未选择课程的分页参数
 	 * @author 戴俊明 <idaijunming@163.com>
@@ -75,17 +73,26 @@ export interface TeacherCourseState {
 	unSelectedDataPagination: Omit<Omit<ManagePaginationProps, 'onChange'>, 'onShowSizeChange'>,
 }
 
+const getId = () => {
+	const id: string | null = localStorage.getItem('sms_id');
+	if (id) {
+		return parseInt(id);
+	} else {
+		return 0;
+	}
+};
+
 /*
- * @class TeacherCourse
+ * @class StudentCourse
  * @description 教师管理课程界面
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 18:50
  **/
-class TeacherCourse extends React.Component<{}, TeacherCourseState> {
+class StudentCourse extends React.Component<{}, StudentCourseState> {
 
-	state: TeacherCourseState = {
-		id: 0,
-		search: defaultCourse,
+	state: StudentCourseState = {
+		id: getId(),
+		search: defaultStudentCourse,
 		batchSelectStatus: false,
 		selectedDialogStatus: false,
 
@@ -101,18 +108,11 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		}
 	};
 
-	handleIdChange = (id: number) => {
-		/*
-		 * @method handleIdChange
-		 * @param id 教师id
-		 * @description 搜索组件的id有变化，重新刷新表格
-		 * @author 戴俊明 <idaijunming@163.com>
-		 * @date 2019/8/10 18:54
-		 **/
-		this.getData(id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
-	};
+	componentDidMount(): void {
+		this.getData(this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+	}
 
-	handleSearchCommand = (id: number, search: Partial<Course>) => {
+	handleSearchCommand = (search: Partial<StudentCourseModel>) => {
 		/*
 		 * @method handleSearchCommand
 		 * @param id 教师id
@@ -121,7 +121,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:06
 		 **/
-		this.getData(id, search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+		this.getData(search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 	};
 
 	handleUnSelectedCourseBatchSelectCommand = () => {
@@ -132,7 +132,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @date 2019/8/10 19:07
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.error('No student info!');
 			return;
 		}
 		if (this.state.selectedRows.length === 0) {
@@ -152,7 +152,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @date 2019/8/10 19:08
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.error('No student info!');
 			return;
 		}
 		if (this.state.selectedData.length === 0) {
@@ -164,7 +164,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		})
 	};
 
-	handleUnSelectedCourseSelect = (record: Course) => {
+	handleUnSelectedCourseSelect = (record: StudentCourseModel) => {
 		/*
 		 * @method handleUnSelectedCourseSelect
 		 * @param record 确定选择的课程
@@ -172,17 +172,16 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:09
 		 **/
-		console.log(record);
-		TeacherCourseService.choose({tid: this.state.id, cid: record.id as number}).then(() => {
+		StudentCourseService.choose({sid: this.state.id, cid: record.cid as number, tid: record.tid}).then(() => {
 			message.success("Successfully chose！");
-			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+			this.getData(this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 		}).catch(() => {
 			message.error("Choice failed！")
 		});
 	};
 
 
-	handleUnSelectedCourseBatchSelect = (records: Course[]) => {
+	handleUnSelectedCourseBatchSelect = (records: StudentCourseModel[]) => {
 		/*
 		 * @method handleUnSelectedCourseBatchSelect
 		 * @param records 批量选择的课程(数组)
@@ -190,16 +189,17 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:11
 		 **/
-		TeacherCourseService.batchChoose(records.map(course => ({
-			tid: this.state.id,
-			cid: course.id as number
+		StudentCourseService.batchChoose(records.map(course => ({
+			sid: this.state.id,
+			cid: course.cid as number,
+			tid: course.cid as number
 		}))).then(() => {
 			this.setState({
 				selectedRows: [],
 				batchSelectStatus: false
 			});
 			message.success("Successfully chose！");
-			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+			this.getData(this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 		}).catch(() => {
 			this.setState({
 				batchSelectStatus: false
@@ -229,7 +229,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:14
 		 **/
-		this.getData(this.state.id, this.state.search, page, pageSize as number);
+		this.getData(this.state.search, page, pageSize as number);
 	};
 
 	handleUnSelectedTablePageSizeChange = (current: number, size: number) => {
@@ -241,10 +241,10 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:16
 		 **/
-		this.getData(this.state.id, this.state.search, current, size);
+		this.getData(this.state.search, current, size);
 	};
 
-	handleUnSelectedTableSelectionChange = (selectedRowKeys: number[], selectedRows: Course[]) => {
+	handleUnSelectedTableSelectionChange = (selectedRowKeys: number[], selectedRows: StudentCourseModel[]) => {
 		/*
 		 * @method handleUnSelectedTableSelectionChange
 		 * @param selectedRowKeys 选择的课程的id(数组)
@@ -258,7 +258,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		});
 	};
 
-	handleSelectedCourseDrop = (records: Course[]) => {
+	handleSelectedCourseDrop = (records: StudentCourseModel[]) => {
 		/*
 		 * @method handleSelectedCourseDrop
 		 * @param records 以选择课程的模态框发送的确定删除的课程（数组）
@@ -266,15 +266,17 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 20:04
 		 **/
+		console.log(records);
 		this.setState({
 			selectedDialogStatus: false
 		});
-		TeacherCourseService.batchDrop(records.map(course => ({
-			tid: this.state.id,
-			cid: course.id as number
+		StudentCourseService.batchDrop(records.map(course => ({
+			sid: this.state.id,
+			cid: course.cid as number,
+			tid: course.tid as number
 		}))).then(() => {
 			message.success("Successfully drop！");
-			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+			this.getData(this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
 		}).catch(() => {
 			message.error("Drop failed！")
 		})
@@ -298,13 +300,12 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 	render() {
 		return (
 			<div>
-				<TeacherCourseSearch id={this.state.id}
-														 onIdChange={this.handleIdChange}
-														 onSearch={this.handleSearchCommand}
-														 onBatchSelect={this.handleUnSelectedCourseBatchSelectCommand}
-														 onShowSelected={this.handleShowSelectedCommand}
+				<ChooseCourseSearch
+					onSearch={this.handleSearchCommand}
+					onBatchSelect={this.handleUnSelectedCourseBatchSelectCommand}
+					onShowSelected={this.handleShowSelectedCommand}
 				/>
-				<TeacherUnSelectedCourseTable dataSource={this.state.unSelectedData}
+				<StudentUnSelectedCourseTable dataSource={this.state.unSelectedData}
 																			onSelect={this.handleUnSelectedCourseSelect}
 																			pagination={{
 																				...this.state.unSelectedDataPagination,
@@ -313,11 +314,11 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 																			}}
 																			onSelectionChange={this.handleUnSelectedTableSelectionChange}
 				/>
-				<TeacherBatchSelectCourseDialog record={this.state.selectedRows}
+				<StudentBatchSelectCourseDialog record={this.state.selectedRows}
 																				visible={this.state.batchSelectStatus}
 																				onSure={this.handleUnSelectedCourseBatchSelect}
 																				onCancel={this.handleUnSelectedCourseBatchSelectCancel}/>
-				<TeacherSelectedCourseDialog dataSource={this.state.selectedData}
+				<StudentSelectedCourseDialog dataSource={this.state.selectedData}
 																		 visible={this.state.selectedDialogStatus}
 																		 onCancel={this.handleSelectedCourseDropCancel}
 																		 onSure={this.handleSelectedCourseDrop}/>
@@ -325,7 +326,7 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		);
 	}
 
-	getData = (id: number, search: Partial<Teacher>, pageNum: number, pageSize: number) => {
+	getData = (search: Partial<StudentCourseModel>, pageNum: number, pageSize: number) => {
 		/*
 		 * @method getData
 		 * @param id 教师id
@@ -336,15 +337,14 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 20:07
 		 **/
-		TeacherCourseService.allMethod([
-			TeacherCourseService.unSelected(id, search.name as string, pageNum, pageSize),
-			TeacherCourseService.selected(id)])
+		StudentCourseService.allMethod([
+			StudentCourseService.unSelected(this.state.id, search.course as string, search.teacher as string, pageNum, pageSize),
+			StudentCourseService.selected(this.state.id)])
 			.then(([unSelectResult, selectResult]) => {
-				const unSelect: PageInfo<Course> = unSelectResult.data.data as PageInfo<Course>;
-				const select: Array<Course> = selectResult.data.data as Array<Course>;
+				const unSelect: PageInfo<StudentCourseModel> = unSelectResult.data.data as PageInfo<StudentCourseModel>;
+				const select: Array<StudentCourseModel> = selectResult.data.data as Array<StudentCourseModel>;
 
 				this.setState({
-					id: id,
 					search: search,
 
 					selectedData: select,
@@ -363,4 +363,4 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 
 }
 
-export default TeacherCourse;
+export default StudentCourse;

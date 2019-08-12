@@ -13,6 +13,7 @@ const TeacherManage = lazy(() => import('../pages/Manage/TeacherManage'));
 const ClazzCourse = lazy(() => import('../pages/Manage/ClazzCourse'));
 const StudentCourse = lazy(() => import('../pages/Manage/StudentCourse'));
 const TeacherCourse = lazy(() => import('../pages/Manage/TeacherCourse'));
+const ChooseCourse = lazy(() => import('../pages/Student/ChooseCourse'));
 
 export class AppRouter extends React.Component {
 
@@ -68,6 +69,7 @@ export class MainRouter extends React.Component {
 						<Route exact path="/main/clazz-course" component={ClazzCourse}/>
 						<Route exact path="/main/student-course" component={StudentCourse}/>
 						<Route exact path="/main/teacher-course" component={TeacherCourse}/>
+						<Route exact path="/main/choose-course" component={ChooseCourse}/>
 						<Route component={ErrorPage}/>
 					</Switch>
 				</Suspense>

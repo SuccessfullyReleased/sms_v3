@@ -97,6 +97,10 @@ class CourseService extends BaseService<Course> {
 		return super.update(this.filter(record), this.isModel);
 	}
 
+	updateRecords(records: Partial<Course>[]): HttpServiceResponse<number> {
+		return super.updateList(records.map(this.filter), this.isModel);
+	}
+
 }
 
 export default new CourseService();

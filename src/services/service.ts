@@ -129,7 +129,7 @@ export class BaseService<T extends Model> extends SingleApi {
 	}
 
 	update(record: Partial<T>, isModel: (record: Partial<T>) => boolean): HttpServiceResponse<number> {
-		if (isModel(record) || record.id) {
+		if (isModel(record) && record.id) {
 			return this.request({
 				method: 'put',
 				data: record
@@ -139,6 +139,21 @@ export class BaseService<T extends Model> extends SingleApi {
 				reject(record);
 			});
 		}
+	}
+
+	updateList(records: Partial<T>[], isModel: (record: Partial<T>) => boolean): HttpServiceResponse<number> {
+		for (const record of records) {
+			if (!isModel(record) || !record.id) {
+				return new Promise<AxiosResponse<HttpBodyEntity<number>>>((resolve, reject) => {
+					reject(record);
+				});
+			}
+		}
+		return this.request({
+			method: 'put',
+			url: '/list',
+			data: records
+		})
 	}
 
 	deleteById(id: number): HttpServiceResponse<number> {

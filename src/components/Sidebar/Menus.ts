@@ -64,6 +64,10 @@ const Menus: Array<Menu> = [{
 		index: '/main/teacher-course',
 		title: 'TeacherCourse'
 	}]
+}, {
+	icon: 'icon-student',
+	index: '/main/choose-course',
+	title: 'ChooseCourse'
 }];
 
 export default Menus

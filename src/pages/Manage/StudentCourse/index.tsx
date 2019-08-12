@@ -127,7 +127,7 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 		 * @date 2019/8/10 19:07
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.warn('No selected student!');
 			return;
 		}
 		if (this.state.selectedRows.length === 0) {
@@ -147,7 +147,7 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 		 * @date 2019/8/10 19:08
 		 **/
 		if (!this.state.id) {
-			message.warn('No selected teacher!');
+			message.warn('No selected student!');
 			return;
 		}
 		if (this.state.selectedData.length === 0) {
@@ -262,7 +262,6 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 20:04
 		 **/
-		console.log(records);
 		this.setState({
 			selectedDialogStatus: false
 		});
