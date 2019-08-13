@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Col, Form, Icon, Input, Row} from "antd";
 import styles from './index.module.css';
-import {Student} from "../../services/StudentService";
 import {ManageSearchProps} from "./index";
+import {StudentClazz} from "../../services/StudentClazzService";
 
 /*
  * @class StudentManageSearchContent
@@ -10,14 +10,15 @@ import {ManageSearchProps} from "./index";
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 22:54
  **/
-const StudentManageSearchContent: React.FC<ManageSearchProps<Student>> = (props) => {
+const StudentManageSearchContent: React.FC<ManageSearchProps<StudentClazz>> = (props) => {
 
 	const handleStudentSearch: React.MouseEventHandler = (e) => {
 		e.preventDefault();
 		const {getFieldValue} = props.form;
 		props.onSearch({
 			sid: getFieldValue('StudentID'),
-			name: getFieldValue('StudentName')
+			name: getFieldValue('StudentName'),
+			className: getFieldValue('ClassName')
 		});
 	};
 
@@ -27,7 +28,7 @@ const StudentManageSearchContent: React.FC<ManageSearchProps<Student>> = (props)
 		<div className="container">
 			<Form>
 				<Row gutter={16}>
-					<Col span={6}>
+					<Col span={5}>
 						<Form.Item>
 							{
 								getFieldDecorator('StudentID')(
@@ -36,11 +37,20 @@ const StudentManageSearchContent: React.FC<ManageSearchProps<Student>> = (props)
 							}
 						</Form.Item>
 					</Col>
-					<Col span={6}>
+					<Col span={5}>
 						<Form.Item>
 							{
 								getFieldDecorator('StudentName')(
 									<Input addonBefore="StudentName"/>
+								)
+							}
+						</Form.Item>
+					</Col>
+					<Col span={5}>
+						<Form.Item>
+							{
+								getFieldDecorator('ClassName')(
+									<Input addonBefore="ClassName"/>
 								)
 							}
 						</Form.Item>
@@ -60,6 +70,6 @@ const StudentManageSearchContent: React.FC<ManageSearchProps<Student>> = (props)
 	);
 };
 
-const StudentManageSearch = Form.create<ManageSearchProps<Student>>({})(StudentManageSearchContent);
+const StudentManageSearch = Form.create<ManageSearchProps<StudentClazz>>({})(StudentManageSearchContent);
 
 export default StudentManageSearch;

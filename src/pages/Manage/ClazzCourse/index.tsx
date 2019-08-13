@@ -97,6 +97,7 @@ class ClazzCourse extends React.Component<{}, ClazzCourseState> {
 	};
 
 	handleIdChange = (id: number) => {
+		console.log(id);
 		/*
 		 * @method handleIdChange
 		 * @param id 教师id

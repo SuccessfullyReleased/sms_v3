@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Button} from "antd";
-import {Student} from "../../services/StudentService";
 import {ColumnProps} from "antd/es/table";
 import styles from './index.module.css';
 import {ManageTableProps} from "./index";
 import ManageTable from "./ManageTable";
 import StudentEditDialog from "../Dialog/EditModal/StudentEditDialog";
 import {DeleteDialog} from "../Dialog/DeleteModal";
+import {StudentClazz} from "../../services/StudentClazzService";
 
 /*
  * @class StudentManageTable
@@ -15,9 +15,9 @@ import {DeleteDialog} from "../Dialog/DeleteModal";
  * @date 2019/8/10 23:07
  * @see CourseManageTable
  **/
-const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
+const StudentManageTable: React.FC<ManageTableProps<StudentClazz>> = (props) => {
 
-	const columns: ColumnProps<Student>[] = [{
+	const columns: ColumnProps<StudentClazz>[] = [{
 		title: 'StudentID',
 		dataIndex: 'sid',
 		key: 'sid',
@@ -26,6 +26,11 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 		title: 'StudentName',
 		dataIndex: 'name',
 		key: 'name',
+		align: 'center'
+	}, {
+		title: 'ClassName',
+		dataIndex: 'className',
+		key: 'className',
 		align: 'center'
 	}, {
 		title: 'Action',
@@ -45,10 +50,10 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 		align: 'center'
 	}];
 
-	const [editRecord, setEditRecord] = useState({} as Student);
+	const [editRecord, setEditRecord] = useState({} as StudentClazz);
 	const [editStatus, setEditStatus] = useState(false);
 
-	const [deleteRecord, setDeleteRecord] = useState({} as Student);
+	const [deleteRecord, setDeleteRecord] = useState({} as StudentClazz);
 	const [deleteStatus, setDeleteStatus] = useState(false);
 
 	const handleEdit = (record: any, index: number) => {
@@ -61,26 +66,26 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 		setDeleteStatus(true);
 	};
 
-	const handleRecordUpdate = (record: Partial<Student>) => {
+	const handleRecordUpdate = (record: Partial<StudentClazz>) => {
 		setEditStatus(false);
-		setEditRecord({} as Student);
+		setEditRecord({} as StudentClazz);
 		props.onUpdate(record);
 	};
 
 	const handleRecordUpdateCancel = () => {
 		setEditStatus(false);
-		setEditRecord({} as Student);
+		setEditRecord({} as StudentClazz);
 	};
 
-	const handleRecordDelete = (record: Student | Student[]) => {
+	const handleRecordDelete = (record: StudentClazz | StudentClazz[]) => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Student);
-		props.onDelete(record as Student);
+		setDeleteRecord({} as StudentClazz);
+		props.onDelete(record as StudentClazz);
 	};
 
 	const handleRecordDeleteCancel = () => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Student);
+		setDeleteRecord({} as StudentClazz);
 	};
 
 	return (

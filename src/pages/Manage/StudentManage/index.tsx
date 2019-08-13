@@ -1,12 +1,13 @@
 import React from 'react';
 import StudentManageSearch from "../../../components/Search/StudentManageSearch";
 import StudentManageTable from "../../../components/Table/StudentManageTable";
-import StudentService, {defaultStudent, Student} from "../../../services/StudentService";
-import {PageInfo} from "../../../services/service";
 import {message} from "antd";
 import StudentEditDialog from "../../../components/Dialog/EditModal/StudentEditDialog";
 import {DeleteDialog} from "../../../components/Dialog/DeleteModal";
 import {ManageState} from "../index";
+import StudentClazzService, {defaultStudentClazz, StudentClazz} from "../../../services/StudentClazzService";
+import StudentService from "../../../services/StudentService";
+import {PageInfo} from "../../../services/service";
 
 /*
  * @class StudentManage
@@ -15,17 +16,17 @@ import {ManageState} from "../index";
  * @date 2019/8/11 0:01
  * @see CourseManage
  **/
-class StudentManage extends React.Component<{}, ManageState<Student>> {
+class StudentManage extends React.Component<{}, ManageState<StudentClazz>> {
 
-	state: ManageState<Student> = {
+	state: ManageState<StudentClazz> = {
 		tableData: [],
 		pagination: {
 			current: 1,
 			pageSize: 5,
 			total: NaN,
 		},
-		search: defaultStudent,
-		insertRecord: defaultStudent,
+		search: defaultStudentClazz,
+		insertRecord: defaultStudentClazz,
 		insertStatus: false,
 		batchDeleteRecords: [],
 		batchDeleteStatus: false
@@ -35,7 +36,7 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		this.getData({}, this.state.pagination.current, this.state.pagination.pageSize);
 	}
 
-	handleSearchCommand = (search: Partial<Student>) => {
+	handleSearchCommand = (search: Partial<StudentClazz>) => {
 		this.getData(search, this.state.pagination.current, this.state.pagination.pageSize);
 	};
 
@@ -46,7 +47,7 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 	};
 
 	handleBatchDeleteCommand = () => {
-		if (this.state.batchDeleteRecords.length===0){
+		if (this.state.batchDeleteRecords.length === 0) {
 			message.warn('No selected students!');
 			return;
 		}
@@ -55,8 +56,8 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		})
 	};
 
-	handleUpdate = (record: Partial<Student>) => {
-		StudentService.updateRecord(record).then(() => {
+	handleUpdate = (record: Partial<StudentClazz>) => {
+		StudentClazzService.updateRecord(record).then(() => {
 			message.success("Update completed！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
 		}).catch(() => {
@@ -64,7 +65,7 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		})
 	};
 
-	handleDelete = (record: Partial<Student>) => {
+	handleDelete = (record: Partial<StudentClazz>) => {
 		StudentService.deleteById(record.id as number).then(() => {
 			message.success("Successfully deleted！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
@@ -81,12 +82,12 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		this.getData(this.state.search, current, size);
 	};
 
-	handleInsert = (record: Partial<Student>) => {
+	handleInsert = (record: Partial<StudentClazz>) => {
 		this.setState({
-			insertRecord: defaultStudent,
+			insertRecord: defaultStudentClazz,
 			insertStatus: false
 		});
-		StudentService.insertRecord(record).then(() => {
+		StudentClazzService.insertRecord(record).then(() => {
 			message.success("Successfully saved！");
 			this.getData(this.state.search, this.state.pagination.current, this.state.pagination.pageSize);
 		}).catch(() => {
@@ -95,7 +96,7 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 	};
 	handleInsertCancel = () => {
 		this.setState({
-			insertRecord: defaultStudent,
+			insertRecord: defaultStudentClazz,
 			insertStatus: false
 		});
 	};
@@ -154,10 +155,10 @@ class StudentManage extends React.Component<{}, ManageState<Student>> {
 		);
 	}
 
-	getData = (search: Partial<Student>, pageNum: number, pageSize: number) => {
+	getData = (search: Partial<StudentClazz>, pageNum: number, pageSize: number) => {
 		console.log(search);
-		StudentService.selectRecords(StudentService.filter(search), pageNum, pageSize).then(res => {
-			const data: PageInfo<Student> = res.data.data as PageInfo<Student>;
+		StudentClazzService.selectRecords(StudentClazzService.filter(search), pageNum, pageSize).then(res => {
+			const data: PageInfo<StudentClazz> = res.data.data as PageInfo<StudentClazz>;
 			this.setState({
 				tableData: data.list,
 				pagination: {

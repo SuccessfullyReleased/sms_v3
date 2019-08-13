@@ -48,13 +48,9 @@ const Menus: Array<Menu> = [{
 	index: '/main/teacher-manage',
 	title: 'TeacherList'
 }, {
-	icon: 'icon-teacher',
-	index: 'ClassManage',
-	title: 'ClassManage',
-	subs: [{
-		index: '/main/clazz-manage',
-		title: 'CourseList'
-	}]
+	icon: 'icon-class',
+	index: '/main/clazz-manage',
+	title: 'ClassList'
 }, {
 	icon: 'icon-course',
 	index: 'CourseManage',
@@ -63,17 +59,17 @@ const Menus: Array<Menu> = [{
 		index: '/main/course-manage',
 		title: 'CourseList'
 	}, {
+		index: '/main/teacher-course',
+		title: 'TeacherCourse'
+	}, {
 		index: '/main/clazz-course',
 		title: 'ClassCourse'
 	}, {
 		index: '/main/student-course',
 		title: 'StudentCourse'
-	}, {
-		index: '/main/teacher-course',
-		title: 'TeacherCourse'
 	}]
 }, {
-	icon: 'icon-student',
+	icon: 'icon-choose',
 	index: '/main/choose-course',
 	title: 'ChooseCourse'
 }];

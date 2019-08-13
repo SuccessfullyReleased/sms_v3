@@ -145,7 +145,7 @@ export const StudentSelectedCourseDialog: React.FC<StudentSelectedCourseDialogPr
 		 * @date 2019/8/10 22:31
 		 **/
 		const prev = dropRecords;
-		setDataSourceCache(dataSourceCache.filter((course) => (course.cid !== record.cid && course.tid !== record.tid)));
+		setDataSourceCache(dataSourceCache.filter((course) => (course.cid !== record.cid || course.tid !== record.tid)));
 		setDropRecords([...prev, record]);
 	};
 
