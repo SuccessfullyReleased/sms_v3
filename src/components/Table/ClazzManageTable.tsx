@@ -1,29 +1,24 @@
 import React, {useState} from 'react';
 import {Button} from "antd";
-import {Student} from "../../services/StudentService";
+import {Clazz} from "../../services/ClazzService";
 import {ColumnProps} from "antd/es/table";
 import styles from './index.module.css';
 import {ManageTableProps} from "./index";
 import ManageTable from "./ManageTable";
-import StudentEditDialog from "../Dialog/EditModal/StudentEditDialog";
+import ClazzEditDialog from "../Dialog/EditModal/ClazzEditDialog";
 import {DeleteDialog} from "../Dialog/DeleteModal";
 
 /*
- * @class StudentManageTable
- * @description 学生管理表格
+ * @class ClazzManageTable
+ * @description 班级管理表格
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 23:07
  * @see CourseManageTable
  **/
-const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
+const ClazzManageTable: React.FC<ManageTableProps<Clazz>> = (props) => {
 
-	const columns: ColumnProps<Student>[] = [{
-		title: 'StudentID',
-		dataIndex: 'sid',
-		key: 'sid',
-		align: 'center'
-	}, {
-		title: 'StudentName',
+	const columns: ColumnProps<Clazz>[] = [{
+		title: 'ClazzName',
 		dataIndex: 'name',
 		key: 'name',
 		align: 'center'
@@ -45,10 +40,10 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 		align: 'center'
 	}];
 
-	const [editRecord, setEditRecord] = useState({} as Student);
+	const [editRecord, setEditRecord] = useState({} as Clazz);
 	const [editStatus, setEditStatus] = useState(false);
 
-	const [deleteRecord, setDeleteRecord] = useState({} as Student);
+	const [deleteRecord, setDeleteRecord] = useState({} as Clazz);
 	const [deleteStatus, setDeleteStatus] = useState(false);
 
 	const handleEdit = (record: any, index: number) => {
@@ -61,26 +56,26 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 		setDeleteStatus(true);
 	};
 
-	const handleRecordUpdate = (record: Partial<Student>) => {
+	const handleRecordUpdate = (record: Partial<Clazz>) => {
 		setEditStatus(false);
-		setEditRecord({} as Student);
+		setEditRecord({} as Clazz);
 		props.onUpdate(record);
 	};
 
 	const handleRecordUpdateCancel = () => {
 		setEditStatus(false);
-		setEditRecord({} as Student);
+		setEditRecord({} as Clazz);
 	};
 
-	const handleRecordDelete = (record: Student | Student[]) => {
+	const handleRecordDelete = (record: Clazz | Clazz[]) => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Student);
-		props.onDelete(record as Student);
+		setDeleteRecord({} as Clazz);
+		props.onDelete(record as Clazz);
 	};
 
 	const handleRecordDeleteCancel = () => {
 		setDeleteStatus(false);
-		setDeleteRecord({} as Student);
+		setDeleteRecord({} as Clazz);
 	};
 
 	return (
@@ -90,7 +85,7 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 				tableData={props.tableData}
 				pagination={props.pagination}
 				onSelectionChange={props.onSelectionChange}/>
-			<StudentEditDialog
+			<ClazzEditDialog
 				key={editRecord.id}
 				record={editRecord}
 				visible={editStatus}
@@ -105,4 +100,4 @@ const StudentManageTable: React.FC<ManageTableProps<Student>> = (props) => {
 	);
 };
 
-export default StudentManageTable;
+export default ClazzManageTable;

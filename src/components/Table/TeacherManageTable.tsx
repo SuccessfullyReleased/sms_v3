@@ -85,18 +85,21 @@ const TeacherManageTable: React.FC<ManageTableProps<Teacher>> = (props) => {
 
 	return (
 		<div className="container">
-			<ManageTable columns={columns}
-									 tableData={props.tableData}
-									 pagination={props.pagination}
-									 onSelectionChange={props.onSelectionChange}/>
-			<TeacherEditDialog record={editRecord}
-												 visible={editStatus}
-												 onSure={handleRecordUpdate}
-												 onCancel={handleRecordUpdateCancel}/>
-			<DeleteDialog record={deleteRecord}
-										visible={deleteStatus}
-										onSure={handleRecordDelete}
-										onCancel={handleRecordDeleteCancel}/>
+			<ManageTable
+				columns={columns}
+				tableData={props.tableData}
+				pagination={props.pagination}
+				onSelectionChange={props.onSelectionChange}/>
+			<TeacherEditDialog
+				record={editRecord}
+				visible={editStatus}
+				onSure={handleRecordUpdate}
+				onCancel={handleRecordUpdateCancel}/>
+			<DeleteDialog
+				record={deleteRecord}
+				visible={deleteStatus}
+				onSure={handleRecordDelete}
+				onCancel={handleRecordDeleteCancel}/>
 		</div>
 	);
 };

@@ -48,6 +48,14 @@ const Menus: Array<Menu> = [{
 	index: '/main/teacher-manage',
 	title: 'TeacherList'
 }, {
+	icon: 'icon-teacher',
+	index: 'ClassManage',
+	title: 'ClassManage',
+	subs: [{
+		index: '/main/clazz-manage',
+		title: 'CourseList'
+	}]
+}, {
 	icon: 'icon-course',
 	index: 'CourseManage',
 	title: 'CourseManage',
@@ -56,7 +64,7 @@ const Menus: Array<Menu> = [{
 		title: 'CourseList'
 	}, {
 		index: '/main/clazz-course',
-		title: 'ClazzCourse'
+		title: 'ClassCourse'
 	}, {
 		index: '/main/student-course',
 		title: 'StudentCourse'
