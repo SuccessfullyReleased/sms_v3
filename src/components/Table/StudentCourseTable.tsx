@@ -187,6 +187,7 @@ export const StudentSelectedCourseTable: React.FC<StudentSelectedCourseTableProp
 		title: 'TeacherName',
 		dataIndex: 'teacher',
 		key: 'teacher',
+		render: (text) => text ? text : '该教师已离职',
 		align: 'center'
 	}, {
 		title: 'Action',

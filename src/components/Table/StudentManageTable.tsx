@@ -31,6 +31,7 @@ const StudentManageTable: React.FC<ManageTableProps<StudentClazz>> = (props) => 
 		title: 'ClassName',
 		dataIndex: 'className',
 		key: 'className',
+		render: (text) => text ? text : '暂无班级',
 		align: 'center'
 	}, {
 		title: 'Action',
