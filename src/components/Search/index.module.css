@@ -1,3 +1,7 @@
+.Text {
+	line-height: 40px;
+}
+
 /*展开收缩的点击文字正常*/
 .MoreLink {
 	line-height: 40px;

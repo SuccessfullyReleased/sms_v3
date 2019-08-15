@@ -1,4 +1,5 @@
 import {BaseService, HttpServiceResponse, Model, SearchResult} from "./service";
+import axios, {Canceler} from "axios";
 
 export interface Course extends Model {
 	name: string,
@@ -101,6 +102,24 @@ class CourseService extends BaseService<Course> {
 		return super.updateList(records.map(this.filter), this.isModel);
 	}
 
+	//自定义业务
+	selectByName(name: string): HttpServiceResponse<SearchResult<Course>> {
+		if (cancel) {
+			cancel("请求取消")
+		}
+		return axios.request({
+			method: 'post',
+			url: '/sms/course/list/search',
+			data: {
+				name
+			},
+			cancelToken: new axios.CancelToken((c) => {
+				cancel = c;
+			})
+		});
+	}
 }
+
+let cancel: Canceler;
 
 export default new CourseService();

@@ -72,6 +72,17 @@ const Menus: Array<Menu> = [{
 	icon: 'icon-choose',
 	index: '/main/choose-course',
 	title: 'ChooseCourse'
+}, {
+	icon: 'icon-write',
+	index: 'ScoreManage',
+	title: 'ScoreManage',
+	subs: [{
+		index: '/main/compulsory-score-course',
+		title: 'CompulsoryScoreManage'
+	}, {
+		index: '/main/elective-score-course',
+		title: 'ElectiveScoreManage'
+	}]
 }];
 
 export default Menus

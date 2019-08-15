@@ -336,7 +336,7 @@ class ClazzCourse extends React.Component<{}, ClazzCourseState> {
 		 **/
 		ClazzCourseService.allMethod([
 			ClazzCourseService.unSelected(id, search.course as string, search.teacher as string, pageNum, pageSize),
-			ClazzCourseService.selected(id)])
+			ClazzCourseService.selected(id, 1, 2)])
 			.then(([unSelectResult, selectResult]) => {
 				const unSelect: PageInfo<ClazzCourseModel> = unSelectResult.data.data as PageInfo<ClazzCourseModel>;
 				const select: Array<ClazzCourseModel> = selectResult.data.data as Array<ClazzCourseModel>;

@@ -335,7 +335,7 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 		 **/
 		StudentCourseService.allMethod([
 			StudentCourseService.unSelected(id, search.course as string, search.teacher as string, pageNum, pageSize),
-			StudentCourseService.selected(id)])
+			StudentCourseService.selected(id, 2, 2)])
 			.then(([unSelectResult, selectResult]) => {
 				const unSelect: PageInfo<StudentCourseModel> = unSelectResult.data.data as PageInfo<StudentCourseModel>;
 				const select: Array<StudentCourseModel> = selectResult.data.data as Array<StudentCourseModel>;

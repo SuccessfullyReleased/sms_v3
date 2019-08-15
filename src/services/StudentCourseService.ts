@@ -4,7 +4,8 @@ import {Model} from "./service";
 export interface SCRelation extends Model {
 	sid: number,
 	cid: number,
-	tid: number
+	tid: number,
+	score?: number
 }
 
 export interface StudentCourseModel {
@@ -12,6 +13,14 @@ export interface StudentCourseModel {
 	course: string,
 	tid: number,
 	teacher: string
+}
+
+export interface StudentScoreModel extends SCRelation {
+	sno: string,
+	studentName: string,
+	courseName: string,
+	teacherName: string,
+	score: number
 }
 
 export const defaultStudentCourse = {
@@ -57,11 +66,14 @@ class StudentCourseService extends SingleApi {
 		})
 	}
 
-	selected(sid: number, pageNum?: number, pageSize?: number) {
+	selected(sid: number, type: number | null, status: number | null, pageNum?: number, pageSize?: number) {
 		if (pageNum && pageSize) {
 			return this.request({
 				method: 'get',
 				url: `/list/selected/${sid}`,
+				params: {
+					type, status
+				},
 				headers: {
 					pageNum, pageSize
 				}
@@ -70,6 +82,9 @@ class StudentCourseService extends SingleApi {
 			return this.request({
 				method: 'get',
 				url: `/list/selected/${sid}`,
+				params: {
+					type, status
+				},
 				headers: {
 					noPage: true
 				}
@@ -87,6 +102,34 @@ class StudentCourseService extends SingleApi {
 			headers: {
 				pageNum, pageSize
 			}
+		})
+	}
+
+	selectClassScore({tid, cid, zid}: { tid: number, cid: number, zid: number }) {
+		return this.request({
+			method: 'get',
+			url: '/list/c-score',
+			params: {
+				tid, cid, zid
+			}
+		})
+	}
+
+	selectScore({tid, cid}: { tid: number, cid: number }) {
+		return this.request({
+			method: 'get',
+			url: '/list/e-score',
+			params: {
+				tid, cid
+			}
+		})
+	}
+
+	updateList(records: Partial<SCRelation>[]) {
+		return this.request({
+			method: 'put',
+			url: '/list',
+			data: records
 		})
 	}
 

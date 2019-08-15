@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d0d31ae-cb70-45ee-8f03-9eb74fc69284" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Search/ScoreManageSearch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/ScoreManageTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Manage/ScoreManage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/ClazzCourseTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/ClazzCourseTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/StudentCourseTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/StudentCourseTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/StudentManageTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/StudentManageTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Search/index.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Search/index.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sidebar/Menus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar/Menus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ClazzCourseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ClazzCourseService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CourseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CourseService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/StudentCourseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/StudentCourseService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/TeacherCourseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/TeacherCourseService.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,14 +31,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Table/StudentManageTable.tsx">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Search/ScoreManageSearch.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+            <state relative-caret-position="226">
+              <caret line="247" column="22" selection-start-line="247" selection-start-column="22" selection-end-line="247" selection-end-column="22" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#49#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="44" column="14" lean-forward="true" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/StudentCourseService.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Table/ManageTable.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="900">
+              <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -36,16 +94,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>he</find>
-      <find>msError</find>
-      <find>Manager</find>
       <find>{}</find>
       <find>RowLine</find>
       <find>studentId</find>
@@ -73,6 +128,9 @@
       <find>student</find>
       <find>fi</find>
       <find>Student</find>
+      <find>TeacherCourseSearch</find>
+      <find>EditTable</find>
+      <find>log</find>
     </findStrings>
     <replaceStrings>
       <replace>Course</replace>
@@ -93,6 +151,7 @@
       <replace>clazz</replace>
       <replace>Clazz</replace>
       <replace>StudentClazz</replace>
+      <replace>ScoreManageSearch</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -101,21 +160,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Sidebar/index.tsx" />
-        <option value="$PROJECT_DIR$/src/components/Table/TeacherCourseTable.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Dashboard/index.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Login/index.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Manage/index.ts" />
-        <option value="$PROJECT_DIR$/src/pages/Setting/index.tsx" />
-        <option value="$PROJECT_DIR$/src/services/TeacherCourseService.ts" />
-        <option value="$PROJECT_DIR$/src/pages/Manage/TeacherCourse/TeacherCourseModal.tsx" />
-        <option value="$PROJECT_DIR$/src/components/Search/index.ts" />
-        <option value="$PROJECT_DIR$/src/services/StudentCourseService.ts" />
         <option value="$PROJECT_DIR$/src/services/UserService.ts" />
         <option value="$PROJECT_DIR$/src/components/Search/TeacherCourseSearch.tsx" />
         <option value="$PROJECT_DIR$/src/components/Search/StudentCourseSearch.tsx" />
         <option value="$PROJECT_DIR$/src/components/Search/ClazzCourseSearch.tsx" />
-        <option value="$PROJECT_DIR$/src/services/ClazzCourseService.ts" />
         <option value="$PROJECT_DIR$/src/services/ManagerService.ts" />
         <option value="$PROJECT_DIR$/src/services/TeacherService.ts" />
         <option value="$PROJECT_DIR$/src/services/ClazzService.ts" />
@@ -125,19 +173,14 @@
         <option value="$PROJECT_DIR$/src/pages/Manage/TeacherManage/index.tsx" />
         <option value="$PROJECT_DIR$/src/router/Check.ts" />
         <option value="$PROJECT_DIR$/src/components/Search/ChooseCourseSearch.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx" />
         <option value="$PROJECT_DIR$/src/components/Dialog/EditModal/CourseEditDialog.tsx" />
         <option value="$PROJECT_DIR$/src/components/Search/CourseManageSearch.tsx" />
         <option value="$PROJECT_DIR$/src/services/service.ts" />
-        <option value="$PROJECT_DIR$/src/services/CourseService.ts" />
         <option value="$PROJECT_DIR$/src/pages/Manage/CourseManage/index.tsx" />
         <option value="$PROJECT_DIR$/src/components/Table/TeacherManageTable.tsx" />
         <option value="$PROJECT_DIR$/src/pages/Manage/ClazzManage/index.tsx" />
         <option value="$PROJECT_DIR$/src/components/Search/ClazzManageSearch.tsx" />
         <option value="$PROJECT_DIR$/src/components/Dialog/EditModal/ClazzEditDialog.tsx" />
-        <option value="$PROJECT_DIR$/src/router/Router.tsx" />
         <option value="$PROJECT_DIR$/src/components/Table/ClazzManageTable.tsx" />
         <option value="$PROJECT_DIR$/src/services/StudentService.ts" />
         <option value="$PROJECT_DIR$/src/services/StudentClazzService.ts" />
@@ -146,12 +189,28 @@
         <option value="$PROJECT_DIR$/src/components/Search/StudentManageSearch.tsx" />
         <option value="$PROJECT_DIR$/src/pages/Manage/ClazzCourse/ClazzCourseModal.tsx" />
         <option value="$PROJECT_DIR$/src/pages/Manage/StudentCourse/StudentCourseModal.tsx" />
-        <option value="$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx" />
-        <option value="$PROJECT_DIR$/src/components/Sidebar/Menus.ts" />
         <option value="$PROJECT_DIR$/src/components/IconFont.ts" />
         <option value="$PROJECT_DIR$/src/components/Table/StudentCourseTable.tsx" />
         <option value="$PROJECT_DIR$/src/components/Table/ClazzCourseTable.tsx" />
         <option value="$PROJECT_DIR$/src/components/Table/StudentManageTable.tsx" />
+        <option value="$PROJECT_DIR$/src/services/CourseService.ts" />
+        <option value="$PROJECT_DIR$/src/components/Table/ScoreManageTable.tsx" />
+        <option value="$PROJECT_DIR$/src/components/Search/index.module.css" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx" />
+        <option value="$PROJECT_DIR$/src/services/ClazzCourseService.ts" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/Elective.tsx" />
+        <option value="$PROJECT_DIR$/src/router/Router.tsx" />
+        <option value="$PROJECT_DIR$/src/components/Sidebar/Menus.ts" />
+        <option value="$PROJECT_DIR$/src/services/TeacherCourseService.ts" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/index.tsx" />
+        <option value="$PROJECT_DIR$/src/services/StudentCourseService.ts" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore/index.tsx" />
+        <option value="$PROJECT_DIR$/src/components/Search/ScoreManageSearch.tsx" />
+        <option value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore/index.tsx" />
       </list>
     </option>
   </component>
@@ -175,6 +234,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,7 +313,25 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="Manage" type="462c0819:PsiDirectoryNode" />
-              <item name="ClazzCourse" type="462c0819:PsiDirectoryNode" />
+              <item name="ScoreManage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sms_v3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Manage" type="462c0819:PsiDirectoryNode" />
+              <item name="ScoreManage" type="462c0819:PsiDirectoryNode" />
+              <item name="CompulsoryScore" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sms_v3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Manage" type="462c0819:PsiDirectoryNode" />
+              <item name="ScoreManage" type="462c0819:PsiDirectoryNode" />
+              <item name="ElectiveScore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
@@ -269,7 +347,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="Manage" type="462c0819:PsiDirectoryNode" />
-              <item name="StudentManage" type="462c0819:PsiDirectoryNode" />
+              <item name="TeacherCourse" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sms_v3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Student" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sms_v3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Student" type="462c0819:PsiDirectoryNode" />
+              <item name="ChooseCourse" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
@@ -277,17 +370,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sms_v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sms_v3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/services" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -301,19 +399,19 @@
     <property name="ts.external.directory.path" value="F:\workspace\WebProjects\sms_v3\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\ScoreManage\ElectiveScore" />
+      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\ScoreManage\CompulsoryScore" />
+      <recent name="F:\workspace\WebProjects\sms_v3\src\components\Table" />
+      <recent name="F:\workspace\WebProjects\sms_v3\src\components\Search" />
+      <recent name="F:\workspace\WebProjects\sms_v3\src\services" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\ScoreManage\ElectiveScore" />
+      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\ScoreManage\CompulsoryScore" />
       <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\TeacherCourse" />
       <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\StudentCourse" />
       <recent name="F:\workspace\WebProjects\sms_v3\src\components\Dialog" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\components\EditModal" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\workspace\WebProjects\sms_v3\src\services" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\pages\Manage\ClazzStudent" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\components\Dialog\EditModal" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\components\Table" />
-      <recent name="F:\workspace\WebProjects\sms_v3\src\components\Search" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -365,7 +463,8 @@
       <workItem from="1565530481360" duration="3858000" />
       <workItem from="1565570838719" duration="29782000" />
       <workItem from="1565654929146" duration="18359000" />
-      <workItem from="1565743867654" duration="2095000" />
+      <workItem from="1565743867654" duration="26729000" />
+      <workItem from="1565827113288" duration="12244000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1564984374161</created>
@@ -472,11 +571,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565697726367</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="处理删除的副作用">
+      <created>1565748885104</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1565748885105</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215971000" />
+    <option name="totallyTimeSpent" value="252849000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -515,7 +621,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32941177" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32941177" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32941177" />
@@ -543,277 +649,10 @@
     <MESSAGE value="课程管理新增批量功能" />
     <MESSAGE value="班级列表" />
     <MESSAGE value="fix some bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix some bugs" />
+    <MESSAGE value="处理删除的副作用" />
+    <option name="LAST_COMMIT_MESSAGE" value="处理删除的副作用" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/Table/ManageTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/TeacherManage/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="54" column="6" lean-forward="true" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Login/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/Check.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Search/StudentCourseSearch.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1631">
-          <caret line="199" column="6" selection-start-line="199" selection-start-column="6" selection-end-line="199" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Search/ChooseCourseSearch.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="19" column="57" lean-forward="true" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1366">
-          <caret line="280" column="35" lean-forward="true" selection-start-line="280" selection-start-column="35" selection-end-line="280" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2115">
-          <caret line="129" column="39" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4806">
-          <caret line="267" column="8" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/menu/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dialog/EditModal/CourseEditDialog.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Table/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="28" column="67" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/button/button.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/modal/Modal.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/CourseManage/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="265" column="28" lean-forward="true" selection-start-line="265" selection-start-column="28" selection-end-line="265" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/CourseService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="100" column="68" selection-start-line="100" selection-start-column="68" selection-end-line="100" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dialog/DeleteModal/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="47" column="65" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" selection-start-line="8" selection-end-line="51" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Search/CourseManageSearch.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Table/CourseManageTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="161" column="27" lean-forward="true" selection-start-line="161" selection-start-column="8" selection-end-line="161" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Table/TeacherManageTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/ClazzService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="59" column="34" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dialog/EditModal/ClazzEditDialog.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/Router.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1003">
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ClazzManage/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="150" column="53" lean-forward="true" selection-start-line="150" selection-start-column="53" selection-end-line="150" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Sidebar/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Search/ClazzManageSearch.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/ClazzStudentService.ts" />
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ClazzStudent/index.tsx" />
-    <entry file="file://$PROJECT_DIR$/src/components/Table/ClazzManageTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/StudentService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Search/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -835,13 +674,6 @@
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/StudentClazzService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="59" column="10" lean-forward="true" selection-start-line="59" selection-start-column="10" selection-end-line="59" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -889,35 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/ClazzCourseService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1656">
-          <caret line="99" column="18" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Sidebar/Menus.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="71" column="20" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Manage/ClazzCourse/ClazzCourseModal.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2538">
@@ -955,16 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Table/TeacherCourseTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Table/ClazzCourseTable.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -981,6 +774,311 @@
           <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/auto-complete/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/select/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/ClazzService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="59" column="34" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Table/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="40" column="41" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/Check.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search/index.module.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/TeacherService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="69" column="26" lean-forward="true" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Table/TeacherCourseTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2412">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/TeacherCourse/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="340" column="47" selection-start-line="340" selection-start-column="47" selection-end-line="340" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ClazzCourse/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="338" column="42" selection-start-line="338" selection-start-column="42" selection-end-line="338" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Student/ChooseCourse/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="341" column="55" selection-start-line="341" selection-start-column="55" selection-end-line="341" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/StudentCourse/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="337" column="44" selection-start-line="337" selection-start-column="44" selection-end-line="337" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore/CompulsoryScore.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore/Elective.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/services/CourseService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="10" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/ClazzCourseService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="66" column="10" lean-forward="true" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Sidebar/Menus.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/Router.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="77" column="90" selection-start-line="77" selection-start-column="71" selection-end-line="77" selection-end-column="90" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.core.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="416" column="4" selection-start-line="416" selection-start-column="4" selection-end-line="416" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/button/button.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="34" column="50" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/TeacherCourseService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search/StudentCourseSearch.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="185" column="40" lean-forward="true" selection-start-line="185" selection-start-column="40" selection-end-line="185" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/StudentService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1512">
+          <caret line="84" column="15" selection-start-line="84" selection-start-column="15" selection-end-line="84" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Table/ScoreManageTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="51" column="5" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/table/Table.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Table/ManageTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/StudentClazzService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/input/Input.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="1980" column="41" lean-forward="true" selection-start-line="1980" selection-start-column="41" selection-end-line="1980" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search/ChooseCourseSearch.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="55" column="7" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="55" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search/TeacherCourseSearch.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2052">
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/antd/lib/input-number/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/StudentCourseService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="86" column="38" selection-start-line="86" selection-start-column="38" selection-end-line="86" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/CompulsoryScore/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="44" column="14" lean-forward="true" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search/ScoreManageSearch.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="247" column="22" selection-start-line="247" selection-start-column="22" selection-end-line="247" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Manage/ScoreManage/ElectiveScore/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

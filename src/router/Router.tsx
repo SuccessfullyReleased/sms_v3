@@ -15,6 +15,8 @@ const ClazzCourse = lazy(() => import('../pages/Manage/ClazzCourse'));
 const StudentCourse = lazy(() => import('../pages/Manage/StudentCourse'));
 const TeacherCourse = lazy(() => import('../pages/Manage/TeacherCourse'));
 const ChooseCourse = lazy(() => import('../pages/Student/ChooseCourse'));
+const CompulsoryScoreManage = lazy(() => import('../pages/Manage/ScoreManage/CompulsoryScore'));
+const ElectiveScoreManage = lazy(() => import('../pages/Manage/ScoreManage/ElectiveScore'));
 
 export class AppRouter extends React.Component {
 
@@ -72,6 +74,8 @@ export class MainRouter extends React.Component {
 						<Route exact path="/main/student-course" component={StudentCourse}/>
 						<Route exact path="/main/teacher-course" component={TeacherCourse}/>
 						<Route exact path="/main/choose-course" component={ChooseCourse}/>
+						<Route exact path="/main/compulsory-score-course" component={CompulsoryScoreManage}/>
+						<Route exact path="/main/elective-score-course" component={ElectiveScoreManage}/>
 						<Route component={ErrorPage}/>
 					</Switch>
 				</Suspense>

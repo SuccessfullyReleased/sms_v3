@@ -57,11 +57,14 @@ class ClazzCourseService extends SingleApi {
 		})
 	}
 
-	selected(zid: number, pageNum?: number, pageSize?: number) {
+	selected(zid: number, type: number | null, status: number | null, pageNum?: number, pageSize?: number) {
 		if (pageNum && pageSize) {
 			return this.request({
 				method: 'get',
 				url: `/list/selected/${zid}`,
+				params: {
+					type, status
+				},
 				headers: {
 					pageNum, pageSize
 				}
@@ -70,6 +73,9 @@ class ClazzCourseService extends SingleApi {
 			return this.request({
 				method: 'get',
 				url: `/list/selected/${zid}`,
+				params: {
+					type, status
+				},
 				headers: {
 					noPage: true
 				}
