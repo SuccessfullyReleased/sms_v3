@@ -105,7 +105,7 @@ class StudentCourseService extends SingleApi {
 		})
 	}
 
-	selectClassScore({tid, cid, zid}: { tid: number, cid: number, zid: number }) {
+	selectCScore({tid, cid, zid}: { tid: number, cid: number, zid: number }) {
 		return this.request({
 			method: 'get',
 			url: '/list/c-score',
@@ -115,13 +115,20 @@ class StudentCourseService extends SingleApi {
 		})
 	}
 
-	selectScore({tid, cid}: { tid: number, cid: number }) {
+	selectEScore({tid, cid}: { tid: number, cid: number }) {
 		return this.request({
 			method: 'get',
 			url: '/list/e-score',
 			params: {
 				tid, cid
 			}
+		})
+	}
+
+	selectScore(sid: number) {
+		return this.request({
+			method: 'get',
+			url: `/list/score/id/${sid}`
 		})
 	}
 

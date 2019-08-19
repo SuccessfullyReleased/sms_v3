@@ -9,6 +9,8 @@ import {
 	StudentSelectedCourseDialog
 } from "../../Manage/StudentCourse/StudentCourseModal";
 import ChooseCourseSearch from "../../../components/Search/ChooseCourseSearch";
+import {getUserInfo, UserInfo} from "../../../router/Check";
+import {RouteComponentProps, withRouter} from "react-router";
 
 /*
  * @class StudentCourseState
@@ -73,25 +75,16 @@ export interface StudentCourseState {
 	unSelectedDataPagination: Omit<Omit<ManagePaginationProps, 'onChange'>, 'onShowSizeChange'>,
 }
 
-const getId = () => {
-	const id: string | null = localStorage.getItem('sms_id');
-	if (id) {
-		return parseInt(id);
-	} else {
-		return 0;
-	}
-};
-
 /*
  * @class StudentCourse
  * @description 教师管理课程界面
  * @author 戴俊明 <idaijunming@163.com>
  * @date 2019/8/10 18:50
  **/
-class StudentCourse extends React.Component<{}, StudentCourseState> {
+class StudentCourse extends React.Component<RouteComponentProps, StudentCourseState> {
 
 	state: StudentCourseState = {
-		id: getId(),
+		id: 0,
 		search: defaultStudentCourse,
 		batchSelectStatus: false,
 		selectedDialogStatus: false,
@@ -109,7 +102,37 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 	};
 
 	componentDidMount(): void {
-		this.getData(this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);
+		const user: UserInfo | null = getUserInfo();
+		if (user) {
+			StudentCourseService.allMethod([
+				StudentCourseService.unSelected(user.id,
+					this.state.search.course as string,
+					this.state.search.teacher as string,
+					this.state.unSelectedDataPagination.current,
+					this.state.unSelectedDataPagination.pageSize),
+				StudentCourseService.selected(user.id, 2, 2)])
+				.then(([unSelectResult, selectResult]) => {
+					const unSelect: PageInfo<StudentCourseModel> = unSelectResult.data.data as PageInfo<StudentCourseModel>;
+					const select: Array<StudentCourseModel> = selectResult.data.data as Array<StudentCourseModel>;
+
+					this.setState({
+						id:user.id,
+
+						selectedData: select,
+						unSelectedRows: [],
+
+						unSelectedData: unSelect.list,
+						selectedRows: [],
+						unSelectedDataPagination: {
+							current: unSelect.pageNum,
+							pageSize: unSelect.pageSize,
+							total: unSelect.total
+						}
+					});
+				});
+		} else {
+			this.props.history.push('/login');
+		}
 	}
 
 	handleSearchCommand = (search: Partial<StudentCourseModel>) => {
@@ -363,4 +386,4 @@ class StudentCourse extends React.Component<{}, StudentCourseState> {
 
 }
 
-export default StudentCourse;
+export default withRouter(StudentCourse);

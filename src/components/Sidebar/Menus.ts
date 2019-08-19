@@ -6,11 +6,17 @@
  **/
 export interface Menu {
 	/*
-	 * @var key唯一标识（使用URL地址）
+ * @var 标题前的图标
+ * @author 戴俊明 <idaijunming@163.com>
+ * @date 2019/8/10 23:05
+ **/
+	icon?: string,
+	/*
+	 * @var URL地址
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 23:03
 	 **/
-	index: string,
+	path: string,
 	/*
 	 * @var 显示的标题
 	 * @author 戴俊明 <idaijunming@163.com>
@@ -18,71 +24,98 @@ export interface Menu {
 	 **/
 	title: string,
 	/*
-	 * @var 标题前的图标
-	 * @author 戴俊明 <idaijunming@163.com>
-	 * @date 2019/8/10 23:05
-	 **/
-	icon?: string,
-	/*
 	 * @var 子菜单
 	 * @author 戴俊明 <idaijunming@163.com>
 	 * @date 2019/8/10 23:05
 	 **/
-	subs?: Array<Menu>
+	subs?: Array<Menu>,
+	/*
+	 * @var 角色等级
+	 * @author 戴俊明 <idaijunming@163.com>
+	 * @date 2019/8/19 14:52
+	 **/
+	levels: number[]
 }
 
 const Menus: Array<Menu> = [{
 	icon: 'icon-user',
-	index: '/main/dashboard',
-	title: 'Dashboard'
+	path: '/main/dashboard',
+	title: 'Dashboard',
+	levels: []
 }, {
 	icon: 'icon-setting',
-	index: '/main/setting',
-	title: 'Setting'
+	path: '/main/setting',
+	title: 'Setting',
+	levels: []
 }, {
 	icon: 'icon-student',
-	index: '/main/student-manage',
-	title: 'StudentList'
+	path: '/main/student-manage',
+	title: 'StudentList',
+	levels: [3]
 }, {
 	icon: 'icon-teacher',
-	index: '/main/teacher-manage',
-	title: 'TeacherList'
+	path: '/main/teacher-manage',
+	title: 'TeacherList',
+	levels: [3]
 }, {
 	icon: 'icon-class',
-	index: '/main/clazz-manage',
-	title: 'ClassList'
+	path: '/main/clazz-manage',
+	title: 'ClassList',
+	levels: [3]
 }, {
 	icon: 'icon-course',
-	index: 'CourseManage',
+	path: '',
 	title: 'CourseManage',
 	subs: [{
-		index: '/main/course-manage',
-		title: 'CourseList'
+		path: '/main/course-manage',
+		title: 'CourseList',
+		levels: [3]
 	}, {
-		index: '/main/teacher-course',
-		title: 'TeacherCourse'
+		path: '/main/teacher-course',
+		title: 'TeacherCourse',
+		levels: [3]
 	}, {
-		index: '/main/clazz-course',
-		title: 'ClassCourse'
+		path: '/main/clazz-course',
+		title: 'ClassCourse',
+		levels: [3]
 	}, {
-		index: '/main/student-course',
-		title: 'StudentCourse'
-	}]
+		path: '/main/student-course',
+		title: 'StudentCourse',
+		levels: [3]
+	}],
+	levels: [3]
 }, {
 	icon: 'icon-choose',
-	index: '/main/choose-course',
-	title: 'ChooseCourse'
+	path: '/main/choose-course',
+	title: 'ChooseCourse',
+	levels: [1]
+}, {
+	icon: 'icon-choose',
+	path: '/main/view-score',
+	title: 'ViewScore',
+	levels: [1]
 }, {
 	icon: 'icon-write',
-	index: 'ScoreManage',
-	title: 'ScoreManage',
+	path: '',
+	title: 'ScoreImport',
 	subs: [{
-		index: '/main/compulsory-score-course',
-		title: 'CompulsoryScoreManage'
+		path: '/main/compulsory-score-course',
+		title: 'CompulsoryScoreManage',
+		levels: [3]
 	}, {
-		index: '/main/elective-score-course',
-		title: 'ElectiveScoreManage'
-	}]
+		path: '/main/elective-score-course',
+		title: 'ElectiveScoreManage',
+		levels: [3]
+	}, {
+		path: '/main/compulsory-score-import',
+		title: 'CompulsoryScoreImport',
+		levels: [2]
+	}, {
+		path: '/main/elective-score-import',
+		title: 'ElectiveScoreImport',
+		levels: [2]
+	}],
+	levels: [2, 3]
 }];
 
 export default Menus

@@ -1,6 +1,6 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, LazyExoticComponent, Suspense} from 'react';
 import {BrowserRouter, Redirect, Route, RouteProps, Switch} from "react-router-dom";
-import {isAuth} from "./Check";
+import {isAuth, isLogin} from "./Check";
 import Main from "../components/Main";
 
 const Login = lazy(() => import("../pages/Login"));
@@ -15,11 +15,28 @@ const ClazzCourse = lazy(() => import('../pages/Manage/ClazzCourse'));
 const StudentCourse = lazy(() => import('../pages/Manage/StudentCourse'));
 const TeacherCourse = lazy(() => import('../pages/Manage/TeacherCourse'));
 const ChooseCourse = lazy(() => import('../pages/Student/ChooseCourse'));
+const ViewScore = lazy(() => import('../pages/Student/ViewScore'));
 const CompulsoryScoreManage = lazy(() => import('../pages/Manage/ScoreManage/CompulsoryScore'));
 const ElectiveScoreManage = lazy(() => import('../pages/Manage/ScoreManage/ElectiveScore'));
+const CompulsoryScoreImport = lazy(() => import('../pages/Teacher/ScoreImport/CompulsoryScore'));
+const ElectiveScoreImport = lazy(() => import('../pages/Teacher/ScoreImport/ElectiveScore'));
+
+interface LoginRouteProps extends RouteProps {
+	component: React.ComponentClass<any, any>;
+}
+
+const LoginRoute: React.FC<LoginRouteProps> = ({component: Component, ...rest}) => {
+	return (
+		<Route
+			{...rest}
+			render={props =>
+				isLogin() ? <Component {...props} /> : <Redirect to="/login"/>
+			}
+		/>
+	);
+};
 
 export class AppRouter extends React.Component {
-
 	render() {
 		return (
 			<div>
@@ -28,7 +45,7 @@ export class AppRouter extends React.Component {
 						<Switch>
 							<Route exact path="/" component={Login}/>
 							<Route path="/login" component={Login}/>
-							<AuthRoute path="/main" component={Main}/>
+							<LoginRoute path="/main" component={Main}/>
 							<Route path="/error/:code" component={ErrorPage}/>
 							<Route component={ErrorPage}/>
 						</Switch>
@@ -37,27 +54,25 @@ export class AppRouter extends React.Component {
 			</div>
 		);
 	}
-
 }
 
 interface AuthRouteProps extends RouteProps {
-	component: React.ComponentClass<any, any>;
+	component: LazyExoticComponent<any>;
+	level: number
 }
 
-const AuthRoute: React.FC<AuthRouteProps> = ({component: Component, ...rest}) => {
-		return (
-			<Route
-				{...rest}
-				render={props =>
-					isAuth() ? <Component {...props} /> : <Redirect to="/login"/>
-				}
-			/>
-		);
-	}
-;
+const AuthRoute: React.FC<AuthRouteProps> = ({component: Component, level, ...rest}) => {
+	return (
+		<Route
+			{...rest}
+			render={props =>
+				isAuth(level) ? <Component {...props} /> : <Redirect to="/error/403"/>
+			}
+		/>
+	);
+};
 
 export class MainRouter extends React.Component {
-
 	render() {
 		return (
 			<div>
@@ -66,16 +81,19 @@ export class MainRouter extends React.Component {
 						<Redirect exact from='/main' to='/main/dashboard'/>
 						<Route exact path="/main/dashboard" component={Dashboard}/>
 						<Route exact path="/main/setting" component={Setting}/>
-						<Route exact path="/main/course-manage" component={CourseManage}/>
-						<Route exact path="/main/student-manage" component={StudentManage}/>
-						<Route exact path="/main/teacher-manage" component={TeacherManage}/>
-						<Route exact path="/main/clazz-manage" component={ClazzManage}/>
-						<Route exact path="/main/clazz-course" component={ClazzCourse}/>
-						<Route exact path="/main/student-course" component={StudentCourse}/>
-						<Route exact path="/main/teacher-course" component={TeacherCourse}/>
-						<Route exact path="/main/choose-course" component={ChooseCourse}/>
-						<Route exact path="/main/compulsory-score-course" component={CompulsoryScoreManage}/>
-						<Route exact path="/main/elective-score-course" component={ElectiveScoreManage}/>
+						<AuthRoute exact path="/main/course-manage" component={CourseManage} level={3}/>
+						<AuthRoute exact path="/main/student-manage" component={StudentManage} level={3}/>
+						<AuthRoute exact path="/main/teacher-manage" component={TeacherManage} level={3}/>
+						<AuthRoute exact path="/main/clazz-manage" component={ClazzManage} level={3}/>
+						<AuthRoute exact path="/main/clazz-course" component={ClazzCourse} level={3}/>
+						<AuthRoute exact path="/main/student-course" component={StudentCourse} level={3}/>
+						<AuthRoute exact path="/main/teacher-course" component={TeacherCourse} level={3}/>
+						<AuthRoute exact path="/main/choose-course" component={ChooseCourse} level={1}/>
+						<AuthRoute exact path="/main/view-score" component={ViewScore} level={1}/>
+						<AuthRoute exact path="/main/compulsory-score-course" component={CompulsoryScoreManage} level={3}/>
+						<AuthRoute exact path="/main/elective-score-course" component={ElectiveScoreManage} level={3}/>
+						<AuthRoute exact path="/main/compulsory-score-import" component={CompulsoryScoreImport} level={2}/>
+						<AuthRoute exact path="/main/elective-score-import" component={ElectiveScoreImport} level={2}/>
 						<Route component={ErrorPage}/>
 					</Switch>
 				</Suspense>

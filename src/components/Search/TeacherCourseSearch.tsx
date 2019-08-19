@@ -168,7 +168,7 @@ const TeacherCourseSearchContent: React.FC<TeacherCourseSearchProps> = (props) =
 							}
 						</Form.Item>
 					</Col>
-					<Col span={8}>
+					<Col span={10}>
 						<div>
 							<Button className={styles.Btn} type="primary" onClick={handleTeacherSearch}>Search<Icon
 								type="search"/></Button>

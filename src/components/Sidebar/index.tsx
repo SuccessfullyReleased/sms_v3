@@ -3,9 +3,28 @@ import {Menu} from 'antd';
 import {RouteComponentProps, withRouter} from "react-router";
 import IconFont from "../IconFont";
 import Menus from './Menus'
-import './index.css';
+import {getUserInfo, UserInfo} from "../../router/Check";
 
-class Sidebar extends React.Component<RouteComponentProps> {
+interface SidebarState {
+	level: number
+}
+
+class Sidebar extends React.Component<RouteComponentProps, SidebarState> {
+
+	state: SidebarState = {
+		level: 0
+	};
+
+	componentDidMount(): void {
+		const user: UserInfo | null = getUserInfo();
+		if (user) {
+			this.setState({
+				level: user.role
+			})
+		} else {
+			this.props.history.push('/login');
+		}
+	}
 
 	onMenuSelect = ({key}: { key: string }) => {
 		this.props.history.push(key);
@@ -14,7 +33,7 @@ class Sidebar extends React.Component<RouteComponentProps> {
 	render() {
 		const {history} = this.props;
 		return (
-			<div className="Sidebar">
+			<div>
 				<Menu
 					defaultSelectedKeys={[history.location.pathname]}
 					selectedKeys={[history.location.pathname]}
@@ -23,50 +42,57 @@ class Sidebar extends React.Component<RouteComponentProps> {
 					onClick={this.onMenuSelect}
 				>
 					{
-						// 遍历一级菜单
 						Menus.map((items) => {
-							// 如果有子菜单，则再对子菜单进行遍历渲染
-							if (items.subs) {
-								return (
-									<Menu.SubMenu
-										key={items.index}
-										title={
-											<span>
+							if (items.levels.length === 0 || items.levels.includes(this.state.level)) {
+								if (items.subs) {
+									return (
+										<Menu.SubMenu
+											key={items.path}
+											title={
+												<span>
 												<IconFont className="sidebar-icon" type={items.icon}/>
 												<span>{items.title}</span>
 											</span>
-										}
-									>
-										{
-											// 遍历二级菜单
-											items.subs.map((item) => {
-												// 如果有子菜单，则再对子菜单进行遍历渲染
-												if (item.subs) {
-													return (
-														<Menu.SubMenu
-															key={item.index}
-															title={<span>{item.title}</span>}
-														>
-															{
-																// 遍历三级菜单，最多支持三级
-																item.subs.map((sub) => {
-																	return <Menu.Item key={sub.index}>{sub.title}</Menu.Item>
-																})
-															}
-														</Menu.SubMenu>
-													)
-												} else {
-													return <Menu.Item key={item.index}>{item.title}</Menu.Item>
-												}
-											})
-										}
-									</Menu.SubMenu>
-								)
+											}
+										>
+											{
+												items.subs.map((item) => {
+													if (item.levels.length === 0 || item.levels.includes(this.state.level)) {
+														if (item.subs) {
+															return (
+																<Menu.SubMenu
+																	key={item.path}
+																	title={<span>{item.title}</span>}
+																>
+																	{
+																		item.subs.map((sub) => {
+																			if (sub.levels.length === 0 || sub.levels.includes(this.state.level)) {
+																				return <Menu.Item key={sub.path}>{sub.title}</Menu.Item>
+																			} else {
+																				return null
+																			}
+																		})
+																	}
+																</Menu.SubMenu>
+															)
+														} else {
+															return <Menu.Item key={item.path}>{item.title}</Menu.Item>
+														}
+													} else {
+														return null;
+													}
+												})
+											}
+										</Menu.SubMenu>
+									)
+								} else {
+									return <Menu.Item key={items.path}>
+										<IconFont className="sidebar-icon" type={items.icon}/>
+										<span>{items.title}</span>
+									</Menu.Item>
+								}
 							} else {
-								return <Menu.Item key={items.index}>
-									<IconFont className="sidebar-icon" type={items.icon}/>
-									<span>{items.title}</span>
-								</Menu.Item>
+								return null;
 							}
 						})
 					}

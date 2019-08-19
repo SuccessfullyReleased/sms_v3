@@ -64,7 +64,7 @@ class Main extends Component<{}, MainState> {
 				<Header handleCollapse={this.handleCollapse} handleFullScreen={this.handleFullScreen}
 								fullscreen={this.state.fullscreen}/>
 				<Layout className={styles.mainContent}>
-					<Layout.Sider collapsed={this.state.collapsed} style={{minHeight: '100vh'}}>
+					<Layout.Sider collapsed={this.state.collapsed} width={240} style={{minHeight: '100vh'}}>
 						<Sidebar/>
 					</Layout.Sider>
 					<Layout>

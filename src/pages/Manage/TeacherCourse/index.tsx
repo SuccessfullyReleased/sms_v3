@@ -172,7 +172,6 @@ class TeacherCourse extends React.Component<{}, TeacherCourseState> {
 		 * @author 戴俊明 <idaijunming@163.com>
 		 * @date 2019/8/10 19:09
 		 **/
-		console.log(record);
 		TeacherCourseService.choose({tid: this.state.id, cid: record.id as number}).then(() => {
 			message.success("Successfully chose！");
 			this.getData(this.state.id, this.state.search, this.state.unSelectedDataPagination.current, this.state.unSelectedDataPagination.pageSize);

@@ -156,7 +156,6 @@ class StudentManage extends React.Component<{}, ManageState<StudentClazz>> {
 	}
 
 	getData = (search: Partial<StudentClazz>, pageNum: number, pageSize: number) => {
-		console.log(search);
 		StudentClazzService.selectRecords(StudentClazzService.filter(search), pageNum, pageSize).then(res => {
 			const data: PageInfo<StudentClazz> = res.data.data as PageInfo<StudentClazz>;
 			this.setState({

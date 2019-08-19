@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./index.module.css";
-import {Button, Form, Input} from "antd";
+import {Button, Card, Form, Input} from "antd";
 import {FormComponentProps} from "antd/es/form";
 import UserService from "../../services/UserService";
 
@@ -92,8 +92,8 @@ const Setting: React.FC<SettingProps> = (props) => {
 	};
 
 	return (
-		<div className="container">
-			<div className={styles.SettingWarp}>
+		<div className={styles.SettingWarp}>
+			<Card className={styles.Card}>
 				<Form className={styles.Content}>
 					<Form.Item>
 						{
@@ -146,7 +146,7 @@ const Setting: React.FC<SettingProps> = (props) => {
 						</div>
 					</Form.Item>
 				</Form>
-			</div>
+			</Card>
 		</div>
 	)
 };

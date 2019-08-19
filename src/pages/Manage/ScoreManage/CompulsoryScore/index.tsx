@@ -48,7 +48,7 @@ class CompulsoryScoreManage extends React.Component<{}, ScoreManageState<Student
 	}
 
 	handleSearchChange = (search: CompulsoryScoreSearchResult) => {
-		StudentCourseService.selectClassScore(search).then(res => {
+		StudentCourseService.selectCScore(search).then(res => {
 			const data = (res.data.data as StudentScoreModel[]).map(tmp => {
 				if (tmp.score === undefined) {
 					tmp.score = 0;
@@ -63,7 +63,7 @@ class CompulsoryScoreManage extends React.Component<{}, ScoreManageState<Student
 	};
 
 	handleClickEdit = (search: CompulsoryScoreSearchResult) => {
-		StudentCourseService.selectClassScore(search).then(res => {
+		StudentCourseService.selectCScore(search).then(res => {
 			const data = (res.data.data as StudentScoreModel[]).map(tmp => {
 				if (tmp.score === undefined) {
 					tmp.score = 0;

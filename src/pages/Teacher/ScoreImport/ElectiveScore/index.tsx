@@ -1,11 +1,17 @@
 import React from 'react';
-import {ElectiveScoreSearch, ElectiveScoreSearchResult} from "../../../../components/Search/ScoreManageSearch";
+import {ElectiveScoreSearchResult} from "../../../../components/Search/ScoreManageSearch";
 import StudentCourseService, {SCRelation, StudentScoreModel} from "../../../../services/StudentCourseService";
 import {Empty} from "antd";
 import {EditTable} from "../index";
+import {RouteComponentProps, withRouter} from "react-router";
+import {
+	ElectiveScoreImportSearch,
+	ElectiveScoreImportSearchResult
+} from "../../../../components/Search/ScoreImportSearch";
+import {getUserInfo, UserInfo} from "../../../../router/Check";
 
 
-interface ScoreManageState<T> {
+interface ScoreImportState<T> {
 
 	search: ElectiveScoreSearchResult,
 
@@ -15,9 +21,9 @@ interface ScoreManageState<T> {
 
 }
 
-class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentScoreModel>> {
+class ElectiveScoreManage extends React.Component<RouteComponentProps, ScoreImportState<StudentScoreModel>> {
 
-	state: ScoreManageState<StudentScoreModel> = {
+	state: ScoreImportState<StudentScoreModel> = {
 		search: {
 			tid: 0,
 			cid: 0
@@ -29,7 +35,8 @@ class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentSc
 	render() {
 		return (
 			<div>
-				<ElectiveScoreSearch
+				<ElectiveScoreImportSearch
+					id={this.state.search.tid}
 					search={this.state.search}
 					onChange={this.handleSearchChange}
 					onEdit={this.handleClickEdit}
@@ -47,8 +54,22 @@ class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentSc
 		);
 	}
 
-	handleSearchChange = (search: ElectiveScoreSearchResult) => {
-		StudentCourseService.selectEScore(search).then(res => {
+	componentDidMount(): void {
+		const user: UserInfo | null = getUserInfo();
+		if (user) {
+			this.setState({
+				search: {
+					tid: user.id,
+					cid: 0
+				},
+			})
+		} else {
+			this.props.history.push('/login');
+		}
+	}
+
+	handleSearchChange = (search: ElectiveScoreImportSearchResult) => {
+		StudentCourseService.selectEScore({tid: this.state.search.tid, ...search}).then(res => {
 			console.log(res);
 			const data = (res.data.data as StudentScoreModel[]).map(tmp => {
 				if (tmp.score === undefined) {
@@ -57,14 +78,14 @@ class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentSc
 				return tmp;
 			});
 			this.setState({
-				search: search,
+				search: {tid: this.state.search.tid, ...search},
 				tableData: data
 			})
 		});
 	};
 
-	handleClickEdit = (search: ElectiveScoreSearchResult) => {
-		StudentCourseService.selectEScore(search).then(res => {
+	handleClickEdit = (search: ElectiveScoreImportSearchResult) => {
+		StudentCourseService.selectEScore({tid: this.state.search.tid, ...search}).then(res => {
 			const data = (res.data.data as StudentScoreModel[]).map(tmp => {
 				if (tmp.score === undefined) {
 					tmp.score = 0;
@@ -72,7 +93,7 @@ class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentSc
 				return tmp;
 			});
 			this.setState({
-				search: search,
+				search: {tid: this.state.search.tid, ...search},
 				tableData: data,
 				editable: true
 			})
@@ -105,4 +126,4 @@ class ElectiveScoreManage extends React.Component<{}, ScoreManageState<StudentSc
 
 }
 
-export default ElectiveScoreManage;
+export default withRouter(ElectiveScoreManage);
