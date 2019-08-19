@@ -57,7 +57,7 @@ class Header extends Component<HeaderProps, HeaderState> {
 						)}>
 							<span className={styles.elDropdownLink}>
 								{this.state.username}
-								<Icon type="down"/>
+								&nbsp;&nbsp;<Icon type="down"/>
 							</span>
 						</Dropdown>
 					</div>

@@ -48,6 +48,11 @@ const Menus: Array<Menu> = [{
 	title: 'Setting',
 	levels: []
 }, {
+	icon: 'icon-class',
+	path: '/main/clazz-manage',
+	title: 'ClassList',
+	levels: [3]
+}, {
 	icon: 'icon-student',
 	path: '/main/student-manage',
 	title: 'StudentList',
@@ -56,11 +61,6 @@ const Menus: Array<Menu> = [{
 	icon: 'icon-teacher',
 	path: '/main/teacher-manage',
 	title: 'TeacherList',
-	levels: [3]
-}, {
-	icon: 'icon-class',
-	path: '/main/clazz-manage',
-	title: 'ClassList',
 	levels: [3]
 }, {
 	icon: 'icon-course',
